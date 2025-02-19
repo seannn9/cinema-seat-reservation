@@ -27,7 +27,7 @@
 .welcome-btn {
     background-color: var(--primary-color);
     color: #fff;
-    border: 1px solid var(--primary-color);
+    border: 2px solid var(--primary-color);
     border-radius: 2rem;
     padding: 0.5rem 1rem;
     transition: all 0.2s;
