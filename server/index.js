@@ -78,6 +78,23 @@ app.post("/login", (req, res) => {
     );
 });
 
+app.get("/getusername/:userid", (req, res) => {
+    const { userid } = req.params;
+    db.query(
+        "SELECT username from users where userid = ?",
+        [userid],
+        (err, results) => {
+            if (err) {
+                return res.status(500).send("Server error.");
+            } else if (results.length === 0) {
+                return res.status(404).send("User doesn't exist");
+            } else {
+                res.send(results);
+            }
+        }
+    );
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
