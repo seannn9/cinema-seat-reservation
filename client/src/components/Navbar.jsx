@@ -26,7 +26,12 @@ export default function Navbar() {
             <div className="nav-logo">
                 <Link to="/">
                     <img src={logo} alt="logo" />
-                    <h1>FilmReserve</h1>
+                    <h1>
+                        Film
+                        <span style={{ color: "var(--primary-color)" }}>
+                            Reserve
+                        </span>
+                    </h1>
                 </Link>
             </div>
             <div className="nav-links">
