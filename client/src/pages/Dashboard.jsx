@@ -14,18 +14,10 @@ export default function Dashboard() {
         }
     }, []);
 
-    const logout = () => {
-        localStorage.clear();
-        navigate("/");
-    };
-
     return (
         <>
             <Navbar />
-            <div>
-                Dashboard
-                <button onClick={logout}>Logout</button>
-            </div>
+            <div>Dashboard</div>
         </>
     );
 }

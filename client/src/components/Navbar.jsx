@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "../styles/Navbar.css";
 import logo from "../assets/favicon32.png";
 import Axios from "axios";
+import ProfileDropdown from "./ProfileDropdown";
 
 export default function Navbar() {
     const [username, setUsername] = useState("");
@@ -30,7 +31,7 @@ export default function Navbar() {
             </div>
             <div className="nav-links">
                 {isLoggedIn ? (
-                    <div>{username}</div>
+                    <ProfileDropdown username={username} />
                 ) : (
                     <Link to="/login" className="login-btn">
                         Login
