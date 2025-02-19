@@ -54,6 +54,10 @@ export default function ProfileDropdown({ username }) {
             {isOpen && (
                 <div className="dropdown-menu">
                     <p style={{ color: "var(--primary-color)" }}>{username}</p>
+                    <button onClick={() => navigate("/dashboard")}>
+                        Dashboard
+                    </button>
+                    <button>Tickets</button>
                     <button>Settings</button>
                     <button onClick={handleLogout}>Logout</button>
                 </div>
