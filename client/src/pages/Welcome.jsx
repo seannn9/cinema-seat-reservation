@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import "../styles/Welcome.css";
 import Navbar from "../components/Navbar";
 
 export default function Welcome() {
+    const navigate = useNavigate();
     return (
         <div className="welcome-container">
             <Navbar />
@@ -16,7 +18,12 @@ export default function Welcome() {
                         Enjoy your movie, stress-free!
                     </p>
                 </div>
-                <button className="welcome-btn">Get Started</button>
+                <button
+                    className="welcome-btn"
+                    onClick={() => navigate("/login")}
+                >
+                    Get Started
+                </button>
             </section>
         </div>
     );
