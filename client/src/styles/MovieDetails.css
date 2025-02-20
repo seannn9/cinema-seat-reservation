@@ -57,9 +57,16 @@
     transition: all 0.2s;
 }
 
-.theater-list h4:hover,
-.date-list h4:hover,
-.time-list h4:hover {
+.theater-list h4:hover:not(.active),
+.date-list h4:hover:not(.active),
+.time-list h4:hover:not(.active) {
+    background-color: var(--hover-color);
+    border-color: var(--hover-color);
+}
+
+.theater-list .active,
+.date-list .active,
+.time-list .active {
     background-color: var(--primary-color);
 }
 
@@ -101,9 +108,16 @@
     transition: all 0.2s;
 }
 
-.order-confirmation button:hover {
+.order-confirmation button:hover:not(.disabled) {
     background-color: transparent;
     color: var(--primary-color);
+}
+
+.order-confirmation button.disabled {
+    background-color: #333;
+    color: #bababa;
+    cursor: not-allowed;
+    border-color: #333;
 }
 
 @media (max-width: 768px) {
