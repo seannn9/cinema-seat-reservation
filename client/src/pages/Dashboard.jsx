@@ -31,17 +31,29 @@ export default function Dashboard() {
                         image={ca4}
                         title="Captain America: Brave New World"
                         release="2025"
+                        duration="1h 59m"
+                        genre="Action, Thriller, Science Fiction"
                     />
                     <MovieCard
                         image={sonic3}
                         title="Sonic the Hedgehog 3"
                         release="2025"
+                        duration="1h 50m"
+                        genre="Action, Comedy, Science Fiction"
                     />
-                    <MovieCard image={flow} title="Flow" release="2025" />
+                    <MovieCard
+                        image={flow}
+                        title="Flow"
+                        release="2025"
+                        duration="1h 25m"
+                        genre="Animation, Fantasy, Adventure"
+                    />
                     <MovieCard
                         image={monkey}
                         title="The Monkey"
                         release="2025"
+                        duration="1h 38m"
+                        genre="Horror, Comedy"
                     />
                 </div>
             </section>
