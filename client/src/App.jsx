@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Welcome from "./pages/Welcome";
 import MovieDetails from "./pages/MovieDetails";
+import Payment from "./pages/Payment";
 library.add(fas);
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/movie-details" element={<MovieDetails />} />
+                <Route path="/payment" element={<Payment />} />
             </Routes>
         </>
     );

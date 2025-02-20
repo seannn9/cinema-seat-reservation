@@ -1,5 +1,6 @@
 .dashboard-container,
-.movie-details-container {
+.movie-details-container,
+.payment-container {
     min-height: 100vh;
     background-image: url("../assets/hero-full.webp");
     background-size: cover;
