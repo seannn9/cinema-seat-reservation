@@ -19,7 +19,7 @@ export default function Dashboard() {
     }, []);
 
     useEffect(() => {
-        Axios.post("http://localhost:5001/getmovie").then((response) => {
+        Axios.post("http://localhost:5001/getmovies").then((response) => {
             setMovies(response.data);
         });
     }, []);
