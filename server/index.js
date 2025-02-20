@@ -16,6 +16,18 @@ const db = mysql.createConnection({
     database: "filmreserve",
 });
 
+app.post("/getmovie", (req, res) => {
+    db.query("SELECT * FROM movie", (err, result) => {
+        if (err) {
+            return res.status(500).send("Server error.");
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+// USER ENDPOINTS
+
 app.post("/register", (req, res) => {
     const { email, username, password } = req.body;
     db.query(
