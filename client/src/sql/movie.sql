@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `movie`
+-- Table structure for table `movies`
 --
 
-CREATE TABLE `movie` (
+CREATE TABLE `movies` (
   `movieid` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `poster` varchar(255) NOT NULL,
@@ -38,10 +38,10 @@ CREATE TABLE `movie` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `movie`
+-- Dumping data for table `movies`
 --
 
-INSERT INTO `movie` (`movieid`, `title`, `poster`, `release_date`, `duration`, `genre`, `price`) VALUES
+INSERT INTO `movies` (`movieid`, `title`, `poster`, `release_date`, `duration`, `genre`, `price`) VALUES
 (1, 'Captain America: Brave New World', 'https://www.themoviedb.org/t/p/w1280/pzIddUEMWhWzfvLI3TwxUG2wGoi.jpg', '2025', '1h 59m', 'Action, Thriller, Science Fiction', 320),
 (2, 'Sonic the Hedgehog 3', 'https://www.themoviedb.org/t/p/w1280/d8Ryb8AunYAuycVKDp5HpdWPKgC.jpg', '2025', '1h 50m', 'Action, Comedy, Science Fiction', 290),
 (3, 'Flow', 'https://www.themoviedb.org/t/p/w1280/imKSymKBK7o73sajciEmndJoVkR.jpg', '2024', '1h 25m', 'Animation, Fantasy, Adventure', 350),
@@ -52,9 +52,9 @@ INSERT INTO `movie` (`movieid`, `title`, `poster`, `release_date`, `duration`, `
 --
 
 --
--- Indexes for table `movie`
+-- Indexes for table `movies`
 --
-ALTER TABLE `movie`
+ALTER TABLE `movies`
   ADD PRIMARY KEY (`movieid`);
 
 --
@@ -62,9 +62,9 @@ ALTER TABLE `movie`
 --
 
 --
--- AUTO_INCREMENT for table `movie`
+-- AUTO_INCREMENT for table `movies`
 --
-ALTER TABLE `movie`
+ALTER TABLE `movies`
   MODIFY `movieid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
