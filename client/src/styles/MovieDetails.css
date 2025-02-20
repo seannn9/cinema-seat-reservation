@@ -2,12 +2,7 @@
     display: flex;
     justify-content: space-evenly;
     gap: 2rem;
-    flex-wrap: wrap-reverse;
     padding: 0 7rem 1rem;
-}
-
-.movie-details-content {
-    padding: 0 2rem;
 }
 
 .movie-details-content .details {
