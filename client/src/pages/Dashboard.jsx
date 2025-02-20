@@ -33,6 +33,7 @@ export default function Dashboard() {
                         release="2025"
                         duration="1h 59m"
                         genre="Action, Thriller, Science Fiction"
+                        price={320}
                     />
                     <MovieCard
                         image={sonic3}
@@ -40,6 +41,7 @@ export default function Dashboard() {
                         release="2025"
                         duration="1h 50m"
                         genre="Action, Comedy, Science Fiction"
+                        price={320}
                     />
                     <MovieCard
                         image={flow}
@@ -47,6 +49,7 @@ export default function Dashboard() {
                         release="2025"
                         duration="1h 25m"
                         genre="Animation, Fantasy, Adventure"
+                        price={320}
                     />
                     <MovieCard
                         image={monkey}
@@ -54,6 +57,7 @@ export default function Dashboard() {
                         release="2025"
                         duration="1h 38m"
                         genre="Horror, Comedy"
+                        price={320}
                     />
                 </div>
             </section>

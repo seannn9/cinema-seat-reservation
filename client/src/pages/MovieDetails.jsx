@@ -181,7 +181,7 @@ export default function MovieDetails() {
                             &nbsp; {selectedTime}
                         </p>
                         <p style={{ textAlign: "right" }}>
-                            Total Price: ₱{price}
+                            Total Price: ₱{state.price}
                         </p>
                         <button
                             onClick={() => navigate("/payment")}

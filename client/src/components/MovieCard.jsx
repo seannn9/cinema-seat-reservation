@@ -12,6 +12,7 @@ export default function MovieCard(props) {
                 release: props.release,
                 duration: props.duration,
                 genre: props.genre,
+                price: props.price,
             },
         });
     };
