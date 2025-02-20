@@ -1,7 +1,6 @@
 .movie-card {
     min-height: 450px;
     width: 250px;
-    background-color: #333;
     border-radius: 20px;
     cursor: pointer;
     transition: all 0.3s;
@@ -14,21 +13,19 @@
 .movie-poster {
     height: 375px;
     overflow: hidden;
-    border-radius: 20px 20px 0 0;
+    border-radius: 20px;
 }
 
 .movie-details {
     display: flex;
     flex-direction: column;
-    /* padding: 0 5px; */
 }
 
-img {
+.movie-card img {
     width: 100%;
     max-width: 250px;
 }
 
-h4,
-p {
-    margin: 0.5rem 0 0.5rem 0;
+.movie-card h4 {
+    margin: 0.5rem 0 0 0;
 }
