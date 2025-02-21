@@ -19,9 +19,11 @@ export default function Dashboard() {
     }, []);
 
     useEffect(() => {
-        Axios.post("http://localhost:5001/getmovies").then((response) => {
-            setMovies(response.data);
-        });
+        Axios.post("http://localhost:5001/getshowingmovies").then(
+            (response) => {
+                setMovies(response.data);
+            }
+        );
     }, []);
 
     return (

@@ -16,7 +16,7 @@ const db = mysql.createConnection({
     database: "filmreserve",
 });
 
-app.post("/getmovies", (req, res) => {
+app.post("/getshowingmovies", (req, res) => {
     db.query("SELECT * FROM movies", (err, result) => {
         if (err) {
             return res.status(500).send("Server error.");
