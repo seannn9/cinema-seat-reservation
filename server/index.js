@@ -63,6 +63,22 @@ app.post("/processpayment", (req, res) => {
     );
 });
 
+app.post("/getusertickets", (req, res) => {
+    const { userid } = req.body;
+
+    db.query(
+        "SELECT * FROM tickets WHERE userid = ?",
+        [userid],
+        (err, result) => {
+            if (err) {
+                return res.status(500).send("Server error.");
+            } else {
+                res.send(result);
+            }
+        }
+    );
+});
+
 // USER ENDPOINTS
 
 app.post("/register", (req, res) => {
