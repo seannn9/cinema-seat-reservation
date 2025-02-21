@@ -26,6 +26,15 @@ export default function MovieDetails() {
     }, [movieid]);
 
     useEffect(() => {
+        const userid = localStorage.getItem("userid");
+        if (userid) {
+            console.log("Logged in");
+        } else {
+            navigate("/login");
+        }
+    }, []);
+
+    useEffect(() => {
         setIsDisabled(
             selectedMall === "Select Theater" ||
                 selectedDate === "Select Date" ||
