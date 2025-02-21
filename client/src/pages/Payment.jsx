@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Axios from "axios";
 
@@ -9,6 +9,15 @@ export default function PaymentComplete() {
     // payment variables
     const [paymentStatus, setPaymentStatus] = useState("");
     const [isProcessing, setIsProcessing] = useState(false);
+
+    useEffect(() => {
+        const userid = localStorage.getItem("userid");
+        if (userid) {
+            console.log("Logged in");
+        } else {
+            navigate("/login");
+        }
+    }, []);
 
     const handlePayment = () => {
         if (!isProcessing) {
