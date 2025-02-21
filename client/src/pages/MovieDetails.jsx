@@ -13,9 +13,6 @@ export default function MovieDetails() {
     const [selectedDate, setSelectedDate] = useState("Select Date");
     const [selectedTime, setSelectedTime] = useState("Select Time");
     const [isDisabled, setIsDisabled] = useState(true);
-    // payment variables
-    const [paymentStatus, setPaymentStatus] = useState("");
-    const [isProcessing, setIsProcessing] = useState(false);
 
     useEffect(() => {
         Axios.post(`http://localhost:5001/getmovie/${movieid}`)
@@ -39,34 +36,6 @@ export default function MovieDetails() {
     if (!movieData) {
         return null;
     }
-
-    const handlePayment = () => {
-        if (!isProcessing) {
-            setIsProcessing(true);
-            Axios.post("http://localhost:5001/processpayment", {
-                movie: movieData.title,
-                location: selectedMall,
-                date: selectedDate,
-                time: selectedTime,
-                price: movieData.price,
-                userid: localStorage.getItem("userid"),
-            })
-                .then((response) => {
-                    if (response.data === "Payment successful!") {
-                        setPaymentStatus("Payment successful!");
-                        navigate("/payment");
-                    } else {
-                        setPaymentStatus("Payment failed!");
-                    }
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
-                .finally(() => {
-                    setIsProcessing(false);
-                });
-        }
-    };
 
     return (
         <div className="movie-details-container">
@@ -231,7 +200,17 @@ export default function MovieDetails() {
                             Total Price: ₱{movieData.price}
                         </p>
                         <button
-                            onClick={handlePayment}
+                            onClick={() =>
+                                navigate("/payment", {
+                                    state: {
+                                        movie: movieData.title,
+                                        location: selectedMall,
+                                        date: selectedDate,
+                                        time: selectedTime,
+                                        price: movieData.price,
+                                    },
+                                })
+                            }
                             disabled={isDisabled}
                             className={isDisabled ? "disabled" : ""}
                         >
