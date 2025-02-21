@@ -15,6 +15,7 @@ export default function Navbar() {
             Axios.get(`http://localhost:5001/getusername/${userid}`).then(
                 (response) => {
                     setUsername(response.data[0].username);
+                    localStorage.setItem("username", response.data[0].username);
                 }
             );
             setIsLoggedIn(true);
