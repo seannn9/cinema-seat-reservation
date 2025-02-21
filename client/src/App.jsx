@@ -21,7 +21,7 @@ function App() {
                     path="/movie-details/:movieid"
                     element={<MovieDetails />}
                 />
-                <Route path="/payment" element={<PaymentComplete />} />
+                <Route path="/payment-success" element={<PaymentComplete />} />
             </Routes>
         </>
     );
