@@ -32,6 +32,10 @@
     transition: all 0.2s;
 }
 
+.dropdown-menu button:last-child {
+    border-radius: 0 0 4px 4px;
+}
+
 .dropdown-menu button:hover {
     color: white;
     background-color: var(--primary-color);
