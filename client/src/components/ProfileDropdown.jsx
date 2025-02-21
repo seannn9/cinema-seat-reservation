@@ -57,8 +57,9 @@ export default function ProfileDropdown({ username }) {
                     <button onClick={() => navigate("/dashboard")}>
                         Dashboard
                     </button>
-                    <button>Tickets</button>
-                    <button>Settings</button>
+                    <button onClick={() => navigate("/tickets")}>
+                        Tickets
+                    </button>
                     <button onClick={handleLogout}>Logout</button>
                 </div>
             )}
