@@ -26,6 +26,26 @@ app.post("/getmovies", (req, res) => {
     });
 });
 
+app.post("/getmovie/:movieid", (req, res) => {
+    const movieid = req.params.movieid;
+
+    db.query(
+        "SELECT * FROM movies WHERE movieid = ?",
+        [movieid],
+        (err, result) => {
+            if (err) {
+                return res.status(500).send("Server error.");
+            }
+
+            if (result.length === 0) {
+                return res.status(404).send("Movie not found.");
+            }
+
+            res.send(result[0]);
+        }
+    );
+});
+
 // USER ENDPOINTS
 
 app.post("/register", (req, res) => {
