@@ -5,16 +5,7 @@ export default function MovieCard(props) {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate("/movie-details", {
-            state: {
-                image: props.image,
-                title: props.title,
-                release: props.release,
-                duration: props.duration,
-                genre: props.genre,
-                price: props.price,
-            },
-        });
+        navigate(`/movie-details/${props.movieid}`);
     };
 
     return (

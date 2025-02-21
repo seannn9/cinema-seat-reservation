@@ -1,17 +1,29 @@
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import Axios from "axios";
 import Navbar from "../components/Navbar";
 import "../styles/MovieDetails.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function MovieDetails() {
-    const { state } = useLocation();
+    const { movieid } = useParams();
     const navigate = useNavigate();
+    const [movieData, setMovieData] = useState(null);
     const [selectedMall, setSelectedMall] = useState("Select Theater");
     const [selectedDate, setSelectedDate] = useState("Select Date");
     const [selectedTime, setSelectedTime] = useState("Select Time");
-    const [price, setPrice] = useState(0);
     const [isDisabled, setIsDisabled] = useState(true);
+
+    useEffect(() => {
+        Axios.post(`http://localhost:5001/getmovie/${movieid}`)
+            .then((response) => {
+                setMovieData(response.data);
+            })
+            .catch((err) => {
+                console.log(err);
+                navigate("/dashboard");
+            });
+    }, [movieid]);
 
     useEffect(() => {
         setIsDisabled(
@@ -20,6 +32,10 @@ export default function MovieDetails() {
                 selectedTime === "Select Time"
         );
     }, [selectedMall, selectedDate, selectedTime]);
+
+    if (!movieData) {
+        return null;
+    }
 
     return (
         <div className="movie-details-container">
@@ -155,14 +171,14 @@ export default function MovieDetails() {
                 <div className="order-details">
                     <div className="movie-details-content">
                         <div className="movie-poster">
-                            <img src={state.image} alt={state.title} />
+                            <img src={movieData.poster} alt={movieData.title} />
                         </div>
                         <div className="details">
-                            <h1>{state.title}</h1>
+                            <h1>{movieData.title}</h1>
                             <div className="info">
-                                <p>Duration: {state.duration}</p>
-                                <p>Genre: {state.genre}</p>
-                                <p>Release: {state.release}</p>
+                                <p>Duration: {movieData.duration}</p>
+                                <p>Genre: {movieData.genre}</p>
+                                <p>Release: {movieData.release_date}</p>
                             </div>
                         </div>
                     </div>
@@ -181,7 +197,7 @@ export default function MovieDetails() {
                             &nbsp; {selectedTime}
                         </p>
                         <p style={{ textAlign: "right" }}>
-                            Total Price: ₱{state.price}
+                            Total Price: ₱{movieData.price}
                         </p>
                         <button
                             onClick={() => navigate("/payment")}

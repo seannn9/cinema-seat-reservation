@@ -33,6 +33,7 @@ export default function Dashboard() {
                     {movies.map((movie, key) => (
                         <MovieCard
                             key={key}
+                            movieid={movie.movieid}
                             image={movie.poster}
                             title={movie.title}
                             release={movie.release_date}

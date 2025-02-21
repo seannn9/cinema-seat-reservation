@@ -17,7 +17,10 @@ function App() {
                 <Route path="/" element={<Welcome />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/movie-details" element={<MovieDetails />} />
+                <Route
+                    path="/movie-details/:movieid"
+                    element={<MovieDetails />}
+                />
                 <Route path="/payment" element={<Payment />} />
             </Routes>
         </>
