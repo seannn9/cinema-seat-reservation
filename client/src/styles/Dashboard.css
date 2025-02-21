@@ -1,12 +1,13 @@
 .dashboard-container,
 .movie-details-container,
-.payment-container {
+.payment-container,
+.tickets-container {
     min-height: 100vh;
     background-image: url("../assets/hero-full.webp");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-}
+} /* uniform design for all pages */
 
 .dashboard-section {
     height: 100%;
