@@ -46,6 +46,23 @@ app.post("/getmovie/:movieid", (req, res) => {
     );
 });
 
+app.post("/processpayment", (req, res) => {
+    const { movie, location, date, time, price, userid } = req.body;
+
+    db.query(
+        "INSERT INTO tickets (movie, location, date, time, price, userid) VALUES (?,?,?,?,?,?)",
+        [movie, location, date, time, price, userid],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).send("Server error.");
+            } else {
+                res.send("Payment successful!");
+            }
+        }
+    );
+});
+
 // USER ENDPOINTS
 
 app.post("/register", (req, res) => {
