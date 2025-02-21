@@ -10,6 +10,11 @@
     padding: 5px 10px;
     border-radius: 1rem;
     margin: 0 2em;
+    transition: all 0.2s;
+}
+
+.profile-icon:hover {
+    color: var(--hover-color);
 }
 
 .dropdown-menu {
