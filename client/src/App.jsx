@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import "./styles/App.css";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -18,6 +18,11 @@ function App() {
                 <Route path="/" element={<Welcome />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                {/* To handle user manually inputting the url without a movie id */}
+                <Route
+                    path="/movie-details"
+                    element={<Navigate to="/dashboard" />}
+                />
                 <Route
                     path="/movie-details/:movieid"
                     element={<MovieDetails />}
