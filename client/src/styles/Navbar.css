@@ -37,6 +37,17 @@
     text-decoration: none;
 }
 
+.dashboard-link {
+    font-weight: bold;
+    color: white;
+    transition: all 0.2s;
+    margin-left: 1em;
+}
+
+.dashboard-link:hover {
+    color: var(--hover-color);
+}
+
 @media (prefers-color-scheme: light) {
     .nav-logo a {
         color: #333;
