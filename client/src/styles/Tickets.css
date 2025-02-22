@@ -1,0 +1,45 @@
+.tickets-section {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.tickets {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    padding: 1em;
+}
+
+.ticket {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    background-color: #333;
+    border: 1px solid var(--primary-color);
+    border-radius: 20px;
+    padding: 1em;
+    max-width: 650px;
+    max-height: 300px;
+}
+
+.ticket-header {
+    place-self: center;
+}
+
+.ticket h1,
+.ticket h3 {
+    margin: 0;
+}
+
+.ticket-info {
+    text-align: left;
+}
+
+.ticket img {
+    width: 100%;
+    max-width: 200px;
+    object-fit: cover;
+}
