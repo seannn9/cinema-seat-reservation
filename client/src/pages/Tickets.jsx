@@ -1,7 +1,8 @@
 import Axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import "../styles/Tickets.css";
 
 export default function Tickets() {
     const [tickets, setTickets] = useState([]);
@@ -37,11 +38,16 @@ export default function Tickets() {
                 <div className="tickets">
                     {tickets.map((ticket, key) => (
                         <div className="ticket" key={key}>
-                            <h1>{ticket.movie}</h1>
-                            <p>{ticket.location}</p>
-                            <p>{ticket.date}</p>
-                            <p>{ticket.time}</p>
-                            <p>₱{ticket.price}</p>
+                            <div className="ticket-header">
+                                <h3>Ticket #{ticket.ticketid}</h3>
+                                <h1>{ticket.movie}</h1>
+                            </div>
+                            <div className="ticket-info">
+                                <p>Theater: {ticket.location}</p>
+                                <p>Date: {ticket.date}</p>
+                                <p>Time: {ticket.time}</p>
+                                <p>Price: ₱{ticket.price}</p>
+                            </div>
                         </div>
                     ))}
                 </div>
