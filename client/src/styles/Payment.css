@@ -1,0 +1,24 @@
+.payment-section {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 8px;
+}
+
+.payment-method {
+    grid-column: span 3 / span 3;
+    grid-row: span 6 / span 6;
+}
+
+.order-summary {
+    grid-column: span 2 / span 2;
+    grid-row: span 3 / span 3;
+    grid-column-start: 4;
+}
+
+.payment {
+    grid-column: span 2 / span 2;
+    grid-row: span 3 / span 3;
+    grid-column-start: 4;
+    grid-row-start: 5;
+}
