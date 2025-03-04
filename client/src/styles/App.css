@@ -11,4 +11,5 @@
     height: 100vh;
     --primary-color: #e50914;
     --hover-color: #b40710;
+    --border-radius: 7px;
 }
