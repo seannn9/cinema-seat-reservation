@@ -32,6 +32,7 @@ export default function MovieDetails() {
         } else {
             navigate("/login");
         }
+        localStorage.removeItem("movieToPay");
     }, []);
 
     useEffect(() => {
@@ -45,6 +46,19 @@ export default function MovieDetails() {
     if (!movieData) {
         return null;
     }
+
+    const proceedToPayment = () => {
+        navigate("/payment", {
+            state: {
+                movie: movieData.title,
+                location: selectedMall,
+                date: selectedDate,
+                time: selectedTime,
+                price: movieData.price,
+            },
+        });
+        localStorage.setItem("movieToPay", movieid);
+    };
 
     return (
         <div className="movie-details-container">
@@ -209,17 +223,7 @@ export default function MovieDetails() {
                             Total Price: ₱{movieData.price}
                         </p>
                         <button
-                            onClick={() =>
-                                navigate("/payment", {
-                                    state: {
-                                        movie: movieData.title,
-                                        location: selectedMall,
-                                        date: selectedDate,
-                                        time: selectedTime,
-                                        price: movieData.price,
-                                    },
-                                })
-                            }
+                            onClick={proceedToPayment}
                             disabled={isDisabled}
                             className={isDisabled ? "disabled" : ""}
                         >
