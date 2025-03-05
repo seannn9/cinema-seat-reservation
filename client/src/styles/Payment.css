@@ -1,20 +1,9 @@
 .payment-section {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: repeat(1, 1fr);
     gap: 8px;
     margin-top: 2rem;
-}
-
-.payment-method {
-    /* grid-column: span 3 / span 3;
-    grid-row: span 2 / span 2; */
-    grid-row: span 2 / span 2;
-}
-
-.payment {
-    grid-column-start: 2;
-    grid-row-start: 2;
 }
 
 /* styling */
@@ -72,4 +61,26 @@
 .payment-inputs:focus {
     border: 1px solid var(--primary-color);
     outline: none;
+}
+
+.order-summary button {
+    width: 25%;
+    border: 1px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    background-color: var(--primary-color);
+    padding: 0.5rem;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.order-summary button:hover {
+    background-color: var(--hover-color);
+    border-color: var(--hover-color);
+}
+
+.order-summary button.disabled {
+    background-color: #333;
+    color: #bababa;
+    cursor: not-allowed;
+    border-color: #333;
 }
