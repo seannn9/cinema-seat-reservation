@@ -46,6 +46,7 @@ export default function Tickets() {
                                 <p>Theater: {ticket.location}</p>
                                 <p>Date: {ticket.date}</p>
                                 <p>Time: {ticket.time}</p>
+                                <p>Seats: {ticket.seats}</p>
                                 <p>Price: ₱{ticket.price}</p>
                             </div>
                         </div>
