@@ -13,6 +13,7 @@ export default function MovieDetails() {
     const [selectedDate, setSelectedDate] = useState("Select Date");
     const [selectedTime, setSelectedTime] = useState("Select Time");
     const [isDisabled, setIsDisabled] = useState(true);
+    const [selectedSeats, setSelectedSeats] = useState("Select Seats");
 
     useEffect(() => {
         Axios.post(`http://localhost:5001/getmovie/${movieid}`)
@@ -39,9 +40,10 @@ export default function MovieDetails() {
         setIsDisabled(
             selectedMall === "Select Theater" ||
                 selectedDate === "Select Date" ||
-                selectedTime === "Select Time"
+                selectedTime === "Select Time" ||
+                selectedSeats === "Select Seats"
         );
-    }, [selectedMall, selectedDate, selectedTime]);
+    }, [selectedMall, selectedDate, selectedTime, selectedSeats]);
 
     if (!movieData) {
         return null;
@@ -54,10 +56,27 @@ export default function MovieDetails() {
                 location: selectedMall,
                 date: selectedDate,
                 time: selectedTime,
+                seats: selectedSeats.join(", "),
                 price: movieData.price,
             },
         });
         localStorage.setItem("movieToPay", movieid);
+    };
+
+    const handleSeatClick = (seatId) => {
+        setSelectedSeats((prev) => {
+            // If prev is a string (initial state), create new array with first selection
+            if (typeof prev === "string") {
+                return [seatId];
+            }
+
+            // Otherwise, handle array operations
+            const newSeats = prev.includes(seatId)
+                ? prev.filter((seat) => seat !== seatId)
+                : [...prev, seatId];
+
+            return newSeats.length === 0 ? "Select Seats" : newSeats;
+        });
     };
 
     return (
@@ -190,6 +209,33 @@ export default function MovieDetails() {
                             </h4>
                         </div>
                     </div>
+                    <div className="seat-layout">
+                        <div className="screen">Screen</div>
+                        <div className="seats-container">
+                            {["A", "B", "C"].map((row) => (
+                                <div key={row} className="seat-row">
+                                    <div className="row-label">{row}</div>
+                                    {[1, 2, 3, 4, 5, 6, 7, 8].map((seat) => (
+                                        <div
+                                            key={`${row}${seat}`}
+                                            className={`seat ${
+                                                selectedSeats.includes(
+                                                    `${row}${seat}`
+                                                )
+                                                    ? "selected"
+                                                    : ""
+                                            }`}
+                                            onClick={() =>
+                                                handleSeatClick(`${row}${seat}`)
+                                            }
+                                        >
+                                            {seat}
+                                        </div>
+                                    ))}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
                 <div className="order-details">
                     <div className="movie-details-content">
@@ -218,6 +264,12 @@ export default function MovieDetails() {
                             {" "}
                             <FontAwesomeIcon icon="fa-solid fa-clock" />
                             &nbsp; {selectedTime}
+                        </p>
+                        <p>
+                            <FontAwesomeIcon icon="fa-solid fa-couch" /> &nbsp;{" "}
+                            {typeof selectedSeats === "string"
+                                ? selectedSeats
+                                : selectedSeats.join(", ")}
                         </p>
                         <p style={{ textAlign: "right" }}>
                             Total Price: ₱{movieData.price}
