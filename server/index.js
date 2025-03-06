@@ -47,11 +47,11 @@ app.post("/getmovie/:movieid", (req, res) => {
 });
 
 app.post("/processpayment", (req, res) => {
-    const { movie, location, date, time, price, userid } = req.body;
+    const { movie, location, date, time, seats, price, userid } = req.body;
 
     db.query(
-        "INSERT INTO tickets (movie, location, date, time, price, userid) VALUES (?,?,?,?,?,?)",
-        [movie, location, date, time, price, userid],
+        "INSERT INTO tickets (movie, location, date, time, seats, price, userid) VALUES (?,?,?,?,?,?,?)",
+        [movie, location, date, time, seats, price, userid],
         (err, result) => {
             if (err) {
                 console.log(err);
