@@ -64,6 +64,7 @@ export default function PaymentComplete() {
                 location: state.location,
                 date: state.date,
                 time: state.time,
+                seats: state.seats,
                 price: state.price,
                 userid: localStorage.getItem("userid"),
             })
