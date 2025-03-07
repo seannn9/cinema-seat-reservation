@@ -119,11 +119,11 @@ export default function Login() {
                             </>
                         )}
 
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="username">Username or Email</label>
                         <input
                             type="text"
                             id="username"
-                            placeholder="Enter your username"
+                            placeholder="Enter your username or email"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                         />

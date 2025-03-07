@@ -114,8 +114,8 @@ app.post("/register", (req, res) => {
 app.post("/login", (req, res) => {
     const { username, password } = req.body;
     db.query(
-        "SELECT userid, password from users where username = ?",
-        [username],
+        "SELECT userid, password from users where username = ? OR email = ?",
+        [username, username],
         async (err, results) => {
             if (err) {
                 return res.status(500).send("Server error.");
