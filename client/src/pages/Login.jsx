@@ -95,6 +95,36 @@ export default function Login() {
             });
     };
 
+    const adminLogin = (e) => {
+        e.preventDefault();
+        setErrorMessage("");
+
+        if (!username || !password) {
+            setErrorMessage("Please fill in both fields.");
+            return;
+        }
+
+        Axios.post("http://localhost:5001/adminlogin", {
+            username: username,
+            password: password,
+        })
+            .then((result) => {
+                if (result.data.message === "Admin Login Successful") {
+                    localStorage.setItem("adminid", result.data.userid);
+                    navigate("/admin");
+                }
+            })
+            .catch((error) => {
+                if (error.response && error.response.status === 400) {
+                    setErrorMessage("Invalid password.");
+                } else if (error.response && error.response.status === 404) {
+                    setErrorMessage("Admin account doesn't exist.");
+                } else {
+                    setErrorMessage("An error occurred. Please try again.");
+                }
+            });
+    };
+
     return (
         <div className="login-container">
             <section className="login-section">
@@ -103,7 +133,13 @@ export default function Login() {
                         <h1>
                             <Link to="/">FilmReserve</Link> {loginState}
                         </h1>
-                        <p>Welcome user! Please enter your details.</p>
+                        <p>
+                            Welcome{" "}
+                            {loginState === "Login" || loginState === "Register"
+                                ? "user"
+                                : "admin"}
+                            ! Please enter your details.
+                        </p>
                     </div>
                     <form>
                         {loginState === "Register" && (
@@ -142,7 +178,7 @@ export default function Login() {
                             </p>
                         )}
 
-                        {loginState === "Login" ? (
+                        {/* {loginState === "Login" ? (
                             <>
                                 <button type="submit" onClick={login}>
                                     Sign In
@@ -176,6 +212,64 @@ export default function Login() {
                                     </span>
                                 </p>
                             </>
+                        )} */}
+                        {loginState === "Login" && (
+                            <>
+                                <button type="submit" onClick={login}>
+                                    Sign In
+                                </button>
+                                <p>
+                                    Don't have an account?{" "}
+                                    <span
+                                        onClick={() => {
+                                            setLoginState("Register");
+                                            clearAll();
+                                        }}
+                                    >
+                                        Sign up for free!
+                                    </span>
+                                </p>
+                            </>
+                        )}
+                        {loginState === "Register" && (
+                            <>
+                                <button type="submit" onClick={register}>
+                                    Sign Up
+                                </button>
+                                <p>
+                                    Already have an account?{" "}
+                                    <span
+                                        onClick={() => {
+                                            setLoginState("Login");
+                                            clearAll();
+                                        }}
+                                    >
+                                        Login now!
+                                    </span>
+                                </p>
+                            </>
+                        )}
+                        {loginState === "Admin" && (
+                            <>
+                                <button type="submit" onClick={adminLogin}>
+                                    Admin Login
+                                </button>
+                                <p
+                                    className="login-redir"
+                                    onClick={() => setLoginState("Login")}
+                                >
+                                    Login As User
+                                </p>
+                            </>
+                        )}
+                        {loginState !== "Admin" && (
+                            <p
+                                className="login-redir"
+                                onClick={() => setLoginState("Admin")}
+                                style={{ margin: "0" }}
+                            >
+                                Login as Admin
+                            </p>
                         )}
                     </form>
                 </div>
