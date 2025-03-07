@@ -210,6 +210,8 @@ export default function PaymentComplete() {
                     <h3>{state.movie}</h3>
                     <p>Date</p>
                     <h3>{state.date}</h3>
+                    <p>Seats</p>
+                    <h3>{state.seats}</h3>
                     <button
                         onClick={handlePayment}
                         disabled={isDisabled}
