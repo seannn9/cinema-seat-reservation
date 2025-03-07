@@ -5,6 +5,7 @@ import "../styles/ProfileDropdown.css";
 
 export default function ProfileDropdown({ username }) {
     const [isOpen, setIsOpen] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
     const dropdownRef = useRef(null);
     const navigate = useNavigate();
     const location = useLocation();
@@ -20,6 +21,13 @@ export default function ProfileDropdown({ username }) {
             navigate("/");
         }
     };
+
+    useEffect(() => {
+        const adminid = localStorage.getItem("adminid");
+        if (adminid) {
+            setIsAdmin(true);
+        }
+    }, []);
 
     useEffect(() => {
         const handleClickOutside = (e) => {
@@ -52,14 +60,21 @@ export default function ProfileDropdown({ username }) {
                 />
             </button>
             {isOpen && (
-                <div className="dropdown-menu">
+                <div
+                    className="dropdown-menu"
+                    style={{ right: isAdmin ? "20%" : "0" }}
+                >
                     <p style={{ color: "var(--primary-color)" }}>{username}</p>
-                    <button onClick={() => navigate("/dashboard")}>
-                        Dashboard
-                    </button>
-                    <button onClick={() => navigate("/tickets")}>
-                        Tickets
-                    </button>
+                    {!isAdmin && (
+                        <>
+                            <button onClick={() => navigate("/dashboard")}>
+                                Dashboard
+                            </button>
+                            <button onClick={() => navigate("/tickets")}>
+                                Tickets
+                            </button>
+                        </>
+                    )}
                     <button onClick={handleLogout}>Logout</button>
                 </div>
             )}

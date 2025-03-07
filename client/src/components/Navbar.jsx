@@ -11,6 +11,7 @@ export default function Navbar() {
 
     useEffect(() => {
         const userid = localStorage.getItem("userid");
+        const adminid = localStorage.getItem("adminid");
         if (userid) {
             Axios.get(`http://localhost:5001/getusername/${userid}`).then(
                 (response) => {
@@ -18,6 +19,10 @@ export default function Navbar() {
                     localStorage.setItem("username", response.data[0].username);
                 }
             );
+            setIsLoggedIn(true);
+        }
+        if (adminid) {
+            setUsername("Admin");
             setIsLoggedIn(true);
         }
     });
