@@ -185,6 +185,54 @@ app.get("/getusername/:userid", (req, res) => {
     );
 });
 
+// Add Movie
+app.post("/addmovie", (req, res) => {
+    const { title, poster, release_date, duration, genre, price } = req.body;
+
+    db.query(
+        "INSERT INTO movies (title, poster, release_date, duration, genre, price) VALUES (?,?,?,?,?,?)",
+        [title, poster, release_date, duration, genre, price],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).send("Error adding movie");
+            }
+            res.send("Movie added successfully!");
+        }
+    );
+});
+
+// Update Movie
+app.post("/updatemovie/:movieid", (req, res) => {
+    const movieid = req.params.movieid;
+    const { title, poster, release_date, duration, genre, price } = req.body;
+
+    db.query(
+        "UPDATE movies SET title=?, poster=?, release_date=?, duration=?, genre=?, price=? WHERE movieid=?",
+        [title, poster, release_date, duration, genre, price, movieid],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).send("Error updating movie");
+            }
+            res.send("Movie updated successfully!");
+        }
+    );
+});
+
+// Delete Movie
+app.post("/deletemovie/:movieid", (req, res) => {
+    const movieid = req.params.movieid;
+
+    db.query("DELETE FROM movies WHERE movieid=?", [movieid], (err, result) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).send("Error deleting movie");
+        }
+        res.send("Movie deleted successfully!");
+    });
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
