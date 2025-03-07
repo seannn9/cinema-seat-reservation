@@ -76,7 +76,14 @@ form p span {
     transition: all 0.2s;
 }
 
-form p span:hover {
+.login-redir {
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+form p span:hover,
+.login-redir:hover {
     color: var(--hover-color);
 }
 
