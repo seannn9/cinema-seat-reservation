@@ -143,6 +143,31 @@ app.post("/login", (req, res) => {
     );
 });
 
+app.post("/adminlogin", (req, res) => {
+    const { username, password } = req.body;
+    db.query(
+        "SELECT * from admin where adminname = ?",
+        [username],
+        async (err, results) => {
+            if (err) {
+                return res.status(500).send("Server error.");
+            }
+            if (results.length === 0) {
+                return res.status(404).send("Admin account doesn't exist.");
+            }
+
+            if (password === results[0].adminpassword) {
+                res.json({
+                    message: "Admin Login Successful",
+                    adminid: results[0].adminid,
+                });
+            } else {
+                res.status(400).send("Invalid password");
+            }
+        }
+    );
+});
+
 app.get("/getusername/:userid", (req, res) => {
     const { userid } = req.params;
     db.query(
