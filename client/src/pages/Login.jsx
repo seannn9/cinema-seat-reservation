@@ -14,8 +14,12 @@ export default function Login() {
 
     useEffect(() => {
         const userid = localStorage.getItem("userid");
+        const adminid = localStorage.getItem("adminid");
         if (userid) {
             navigate("/dashboard");
+        }
+        if (adminid) {
+            navigate("/admin");
         }
     }, []);
 
