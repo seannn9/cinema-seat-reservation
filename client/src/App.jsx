@@ -9,6 +9,7 @@ import Welcome from "./pages/Welcome";
 import MovieDetails from "./pages/MovieDetails";
 import Payment from "./pages/Payment";
 import Tickets from "./pages/Tickets";
+import Admin from "./admin/Admin";
 library.add(fas);
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
                 />
                 <Route path="/payment" element={<Payment />} />
                 <Route path="tickets" element={<Tickets />} />
+                <Route path="/admin" element={<Admin />} />
             </Routes>
         </>
     );
