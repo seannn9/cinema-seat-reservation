@@ -7,7 +7,10 @@ TODOS:
 - [x] Login/Register using localstorage
 - [x] Dashboard containing dummy movies
 - [x] Redirect to ticket reserving page when clicking on a movie card
-- [ ] Add a checkout and ticket system then store in database
+- [x] Working Seat selection/reservation
+- [x] Add a checkout and ticket system then store in database
+- [ ] Working dummy payment system
+- [ ] Admin page for CRUD operations
 
 Tech Used:
 - React JS
