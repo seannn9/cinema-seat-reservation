@@ -212,6 +212,8 @@ export default function PaymentComplete() {
                     <h3>{state.date}</h3>
                     <p>Seats</p>
                     <h3>{state.seats}</h3>
+                    <p>Total Price</p>
+                    <h3>₱{state.price}</h3>
                     <button
                         onClick={handlePayment}
                         disabled={isDisabled}
