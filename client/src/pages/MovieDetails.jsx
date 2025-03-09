@@ -14,6 +14,7 @@ export default function MovieDetails() {
     const [selectedTime, setSelectedTime] = useState("Select Time");
     const [isDisabled, setIsDisabled] = useState(true);
     const [selectedSeats, setSelectedSeats] = useState("Select Seats");
+    const [totalPrice, setTotalPrice] = useState(0);
 
     useEffect(() => {
         Axios.post(`http://localhost:5001/getmovie/${movieid}`)
@@ -57,7 +58,7 @@ export default function MovieDetails() {
                 date: selectedDate,
                 time: selectedTime,
                 seats: selectedSeats.join(", "),
-                price: movieData.price,
+                price: totalPrice,
             },
         });
         localStorage.setItem("movieToPay", movieid);
@@ -67,13 +68,18 @@ export default function MovieDetails() {
         setSelectedSeats((prev) => {
             // If prev is a string (initial state), create new array with first selection
             if (typeof prev === "string") {
+                setTotalPrice(movieData.price);
                 return [seatId];
             }
 
-            // Otherwise, handle array operations
+            // Otherwise, add to the existing array
             const newSeats = prev.includes(seatId)
                 ? prev.filter((seat) => seat !== seatId)
                 : [...prev, seatId];
+
+            setTotalPrice(
+                newSeats.length === 0 ? 0 : movieData.price * newSeats.length
+            );
 
             return newSeats.length === 0 ? "Select Seats" : newSeats;
         });
@@ -245,9 +251,23 @@ export default function MovieDetails() {
                         <div className="details">
                             <h1>{movieData.title}</h1>
                             <div className="info">
-                                <p>Duration: {movieData.duration}</p>
-                                <p>Genre: {movieData.genre}</p>
-                                <p>Release: {movieData.release_date}</p>
+                                <p>
+                                    <span className="bold">Duration:</span>{" "}
+                                    {movieData.duration}
+                                </p>
+                                <p>
+                                    <span className="bold">Genre:</span>{" "}
+                                    {movieData.genre}
+                                </p>
+                                <p>
+                                    <span className="bold">Release:</span>{" "}
+                                    {movieData.release_date}
+                                    &nbsp;&nbsp;|&nbsp;&nbsp;{" "}
+                                    <span className="bold">
+                                        Ticket Price:
+                                    </span>{" "}
+                                    ₱{movieData.price}{" "}
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -271,8 +291,8 @@ export default function MovieDetails() {
                                 ? selectedSeats
                                 : selectedSeats.join(", ")}
                         </p>
-                        <p style={{ textAlign: "right" }}>
-                            Total Price: ₱{movieData.price}
+                        <p style={{ textAlign: "right", fontWeight: "bold" }}>
+                            TOTAL PRICE: ₱{totalPrice}
                         </p>
                         <button
                             onClick={proceedToPayment}
