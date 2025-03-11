@@ -39,15 +39,44 @@ export default function Tickets() {
                     {tickets.map((ticket, key) => (
                         <div className="ticket" key={key}>
                             <div className="ticket-header">
-                                <h3>Ticket #{ticket.ticketid}</h3>
-                                <h1>{ticket.movie}</h1>
+                                <span className="ticket-number">
+                                    #{ticket.ticketid}
+                                </span>
+                                <h2 className="movie-title">{ticket.movie}</h2>
                             </div>
                             <div className="ticket-info">
-                                <p>Theater: {ticket.location}</p>
-                                <p>Date: {ticket.date}</p>
-                                <p>Time: {ticket.time}</p>
-                                <p>Seats: {ticket.seats}</p>
-                                <p>Price: ₱{ticket.price}</p>
+                                <div className="info-group">
+                                    <div className="info-item">
+                                        <span className="label">Theater:</span>
+                                        <span className="value">
+                                            {ticket.location}
+                                        </span>
+                                    </div>
+                                    <div className="info-item">
+                                        <span className="label">Date:</span>
+                                        <span className="value">
+                                            {ticket.date}
+                                        </span>
+                                    </div>
+                                    <div className="info-item">
+                                        <span className="label">Time:</span>
+                                        <span className="value">
+                                            {ticket.time}
+                                        </span>
+                                    </div>
+                                    <div className="info-item">
+                                        <span className="label">Seats:</span>
+                                        <span className="value">
+                                            {ticket.seats}
+                                        </span>
+                                    </div>
+                                    <div className="info-item">
+                                        <span className="label">Price:</span>
+                                        <span className="value">
+                                            ₱{ticket.price}
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     ))}
