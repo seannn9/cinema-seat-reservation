@@ -33,7 +33,7 @@ function App() {
                 <Route path="tickets" element={<Tickets />} />
                 <Route path="/admin" element={<Admin />} />
             </Routes>
-            <ToastContainer />
+            <ToastContainer autoClose={3000} closeOnClick={true} theme="dark" />
         </>
     );
 }
