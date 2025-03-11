@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import "../styles/Login.css";
 import heroHalf from "../assets/hero-half.webp";
+import { toast } from "react-toastify";
 
 export default function Login() {
     const navigate = useNavigate();
@@ -53,6 +54,7 @@ export default function Login() {
             .then((result) => {
                 if (result.data === "Account creation successful!") {
                     navigate("/dashboard");
+                    toast.success("Account created successfully!");
                 }
             })
             .catch((error) => {
@@ -62,6 +64,7 @@ export default function Login() {
                     );
                 } else {
                     setErrorMessage("An error occurred. Please try again.");
+                    toast.error("An error occurred. Please try again.");
                 }
             });
     };
@@ -81,6 +84,7 @@ export default function Login() {
         })
             .then((result) => {
                 if (result.data.message === "Login success") {
+                    toast.success("Login successful!");
                     localStorage.setItem("userid", result.data.userid);
                     navigate("/dashboard");
                 }
@@ -95,6 +99,7 @@ export default function Login() {
                 } else {
                     console.log(error);
                     setErrorMessage("An error occurred. Please try again.");
+                    toast.error("An error occurred. Please try again.");
                 }
             });
     };
@@ -114,6 +119,7 @@ export default function Login() {
         })
             .then((result) => {
                 if (result.data.message === "Admin Login Successful") {
+                    toast.success("Admin logged in successfully!");
                     localStorage.setItem("adminid", result.data.userid);
                     navigate("/admin");
                 }
@@ -125,6 +131,7 @@ export default function Login() {
                     setErrorMessage("Admin account doesn't exist.");
                 } else {
                     setErrorMessage("An error occurred. Please try again.");
+                    toast.error("An error occurred. Please try again.");
                 }
             });
     };
@@ -159,11 +166,17 @@ export default function Login() {
                             </>
                         )}
 
-                        <label htmlFor="username">Username or Email</label>
+                        <label htmlFor="username">
+                            Username {loginState === "Login" && "or Email"}{" "}
+                        </label>
                         <input
                             type="text"
                             id="username"
-                            placeholder="Enter your username or email"
+                            placeholder={
+                                loginState === "Login"
+                                    ? "Enter your username or email"
+                                    : "Enter your username"
+                            }
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                         />
@@ -181,42 +194,6 @@ export default function Login() {
                                 {errorMessage}
                             </p>
                         )}
-
-                        {/* {loginState === "Login" ? (
-                            <>
-                                <button type="submit" onClick={login}>
-                                    Sign In
-                                </button>
-                                <p>
-                                    Don't have an account?{" "}
-                                    <span
-                                        onClick={() => {
-                                            setLoginState("Register");
-                                            clearAll();
-                                        }}
-                                    >
-                                        Sign up for free!
-                                    </span>
-                                </p>
-                            </>
-                        ) : (
-                            <>
-                                <button type="submit" onClick={register}>
-                                    Sign Up
-                                </button>
-                                <p>
-                                    Already have an account?{" "}
-                                    <span
-                                        onClick={() => {
-                                            setLoginState("Login");
-                                            clearAll();
-                                        }}
-                                    >
-                                        Login now!
-                                    </span>
-                                </p>
-                            </>
-                        )} */}
                         {loginState === "Login" && (
                             <>
                                 <button type="submit" onClick={login}>
