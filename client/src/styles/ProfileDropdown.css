@@ -1,5 +1,6 @@
 .profile-dropdown {
     position: relative;
+    z-index: 999;
 }
 
 .profile-icon {
