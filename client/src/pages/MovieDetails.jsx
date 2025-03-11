@@ -216,30 +216,44 @@ export default function MovieDetails() {
                         </div>
                     </div>
                     <div className="seat-layout">
-                        <div className="screen">Screen</div>
+                        <div className="screen">SCREEN</div>
                         <div className="seats-container">
-                            {["A", "B", "C"].map((row) => (
+                            {["A", "B", "C", "D", "E"].map((row) => (
                                 <div key={row} className="seat-row">
                                     <div className="row-label">{row}</div>
-                                    {[1, 2, 3, 4, 5, 6, 7, 8].map((seat) => (
-                                        <div
-                                            key={`${row}${seat}`}
-                                            className={`seat ${
-                                                selectedSeats.includes(
-                                                    `${row}${seat}`
-                                                )
-                                                    ? "selected"
-                                                    : ""
-                                            }`}
-                                            onClick={() =>
-                                                handleSeatClick(`${row}${seat}`)
-                                            }
-                                        >
-                                            {seat}
-                                        </div>
-                                    ))}
+                                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(
+                                        (seat) => (
+                                            <div
+                                                key={`${row}${seat}`}
+                                                className={`seat ${
+                                                    selectedSeats.includes(
+                                                        `${row}${seat}`
+                                                    )
+                                                        ? "selected"
+                                                        : ""
+                                                }`}
+                                                onClick={() =>
+                                                    handleSeatClick(
+                                                        `${row}${seat}`
+                                                    )
+                                                }
+                                            >
+                                                {seat}
+                                            </div>
+                                        )
+                                    )}
                                 </div>
                             ))}
+                        </div>
+                        <div className="seat-legend">
+                            <div className="legend-item">
+                                <div className="legend-seat legend-available"></div>
+                                <span>Available</span>
+                            </div>
+                            <div className="legend-item">
+                                <div className="legend-seat legend-selected"></div>
+                                <span>Selected</span>
+                            </div>
                         </div>
                     </div>
                 </div>

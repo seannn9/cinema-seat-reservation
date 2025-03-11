@@ -3,38 +3,166 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    background-image: linear-gradient(
+            to right,
+            rgba(0, 0, 0, 0.9) 0%,
+            rgba(0, 0, 0, 0.7) 50%,
+            rgba(0, 0, 0, 0.4) 100%
+        ),
+        url("../assets/hero-full.webp");
+    background-size: cover;
+    background-position: center;
+    position: relative;
 }
 
 .welcome-section {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 75%;
+    height: calc(100vh - 80px); /* Adjust based on navbar height */
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.welcome-content {
+    max-width: 800px;
+    width: 100%;
+    animation: fadeInUp 1s ease-out;
 }
 
 .welcome-msg {
     display: flex;
     flex-direction: column;
-    margin: 1rem 0;
+    margin-bottom: 3rem;
+    align-items: center;
 }
 
-.welcome-msg h1 {
+.hero-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.2;
     margin: 0;
-    font-size: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.hero-title .accent {
+    color: var(--primary-color);
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-title .secondary {
+    font-weight: 600;
+    background: linear-gradient(to right, #ffffff, #cccccc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    line-height: 1.6;
+    margin: 2rem 0 0;
+    color: #cccccc;
+    max-width: 600px;
+}
+
+.cta-container {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    justify-content: center;
 }
 
 .welcome-btn {
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.welcome-btn.primary {
     background-color: var(--primary-color);
     color: #fff;
-    border: 2px solid var(--primary-color);
-    border-radius: 2rem;
-    padding: 0.5rem 1rem;
-    transition: all 0.2s;
-    cursor: pointer;
+    border: none;
+    box-shadow: 0 4px 15px rgba(var(--primary-color-rgb), 0.3);
+}
+
+.welcome-btn.secondary {
+    background-color: transparent;
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .welcome-btn:hover {
-    background-color: transparent;
-    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.welcome-btn.primary:hover {
+    background-color: var(--hover-color);
+    box-shadow: 0 6px 20px rgba(var(--primary-color-rgb), 0.4);
+}
+
+.welcome-btn.secondary:hover {
+    border-color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .welcome-section {
+        padding: 2rem 1.5rem;
+        text-align: center;
+    }
+
+    .hero-subtitle br {
+        display: none;
+    }
+
+    .cta-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .welcome-btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .welcome-section {
+        padding: 1.5rem 1rem;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .welcome-btn {
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+    }
 }

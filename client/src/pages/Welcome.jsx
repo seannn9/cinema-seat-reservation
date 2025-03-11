@@ -8,22 +8,34 @@ export default function Welcome() {
         <div className="welcome-container">
             <Navbar />
             <section className="welcome-section">
-                <div className="welcome-msg">
-                    <h1>
-                        <strong>The Perfect Seat.</strong>
-                    </h1>
-                    <h1>Just A Click Away</h1>
-                    <p>
-                        Skip the lines and reserve your seat online. <br />
-                        Enjoy your movie, stress-free!
-                    </p>
+                <div className="welcome-content">
+                    <div className="welcome-msg">
+                        <h1 className="hero-title">
+                            <span className="accent">The Perfect Seat.</span>
+                            <span className="secondary">Just A Click Away</span>
+                        </h1>
+                        <p className="hero-subtitle">
+                            Skip the lines and reserve your seat online.
+                            <br />
+                            Enjoy your movie, stress-free!
+                        </p>
+                    </div>
+                    <div className="cta-container">
+                        <button
+                            className="welcome-btn primary"
+                            onClick={() => navigate("/login")}
+                        >
+                            Get Started
+                        </button>
+                        <button
+                            className="welcome-btn secondary"
+                            onClick={() => navigate("/dashboard")}
+                        >
+                            Browse Movies
+                        </button>
+                    </div>
                 </div>
-                <button
-                    className="welcome-btn"
-                    onClick={() => navigate("/login")}
-                >
-                    Get Started
-                </button>
+                <div className="hero-overlay"></div>
             </section>
         </div>
     );

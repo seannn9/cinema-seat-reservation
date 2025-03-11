@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import "../styles/Tickets.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Tickets() {
     const [tickets, setTickets] = useState([]);
@@ -47,30 +48,50 @@ export default function Tickets() {
                             <div className="ticket-info">
                                 <div className="info-group">
                                     <div className="info-item">
+                                        <FontAwesomeIcon
+                                            icon="fa-solid fa-location-dot"
+                                            className="info-icon"
+                                        />
                                         <span className="label">Theater:</span>
                                         <span className="value">
                                             {ticket.location}
                                         </span>
                                     </div>
                                     <div className="info-item">
+                                        <FontAwesomeIcon
+                                            icon="fa-solid fa-calendar-days"
+                                            className="info-icon"
+                                        />
                                         <span className="label">Date:</span>
                                         <span className="value">
                                             {ticket.date}
                                         </span>
                                     </div>
                                     <div className="info-item">
+                                        <FontAwesomeIcon
+                                            icon="fa-solid fa-clock"
+                                            className="info-icon"
+                                        />
                                         <span className="label">Time:</span>
                                         <span className="value">
                                             {ticket.time}
                                         </span>
                                     </div>
                                     <div className="info-item">
+                                        <FontAwesomeIcon
+                                            icon="fa-solid fa-couch"
+                                            className="info-icon"
+                                        />
                                         <span className="label">Seats:</span>
                                         <span className="value">
                                             {ticket.seats}
                                         </span>
                                     </div>
                                     <div className="info-item">
+                                        <FontAwesomeIcon
+                                            icon="fa-solid fa-peso-sign"
+                                            className="info-icon"
+                                        />
                                         <span className="label">Price:</span>
                                         <span className="value">
                                             ₱{ticket.price}
