@@ -36,7 +36,7 @@ function App() {
             <ToastContainer
                 autoClose={3000}
                 closeOnClick={true}
-                theme="dark"
+                theme="colored"
                 pauseOnFocusLoss={false}
                 pauseOnHover={false}
             />
