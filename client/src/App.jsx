@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import "./styles/App.css";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
+import { ToastContainer } from "react-toastify";
 // Pages
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
@@ -32,6 +33,7 @@ function App() {
                 <Route path="tickets" element={<Tickets />} />
                 <Route path="/admin" element={<Admin />} />
             </Routes>
+            <ToastContainer />
         </>
     );
 }
