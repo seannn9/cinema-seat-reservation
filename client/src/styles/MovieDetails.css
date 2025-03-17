@@ -100,9 +100,9 @@
     font-weight: 500;
 }
 
-.theater-list h4:hover,
-.date-list h4:hover,
-.time-list h4:hover {
+.theater-list h4:hover:not(.active),
+.date-list h4:hover:not(.active),
+.time-list h4:hover:not(.active) {
     background-color: var(--hover-color);
     transform: translateY(-2px);
 }
