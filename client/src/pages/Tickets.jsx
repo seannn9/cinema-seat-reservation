@@ -35,7 +35,9 @@ export default function Tickets() {
         <div className="tickets-container">
             <Navbar />
             <div className="tickets-section">
-                <h1>{username}'s Tickets</h1>
+                <h1>
+                    <span style={{ color: "white" }}>{username}'s</span> Tickets
+                </h1>
                 <div className="tickets">
                     {tickets.map((ticket, key) => (
                         <div className="ticket" key={key}>
