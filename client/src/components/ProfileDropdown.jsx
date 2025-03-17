@@ -9,12 +9,13 @@ export default function ProfileDropdown({ username }) {
     const dropdownRef = useRef(null);
     const navigate = useNavigate();
     const location = useLocation();
+    const { pathname } = location;
 
     const handleLogout = (e) => {
         e.preventDefault();
         localStorage.clear();
 
-        const { pathname } = location;
+        // const { pathname } = location;
         if (pathname === "/") {
             window.location.reload();
         } else {
@@ -67,10 +68,20 @@ export default function ProfileDropdown({ username }) {
                     <p style={{ color: "var(--primary-color)" }}>{username}</p>
                     {!isAdmin && (
                         <>
-                            <button onClick={() => navigate("/dashboard")}>
+                            <button
+                                className={
+                                    pathname === "/dashboard" ? "active" : ""
+                                }
+                                onClick={() => navigate("/dashboard")}
+                            >
                                 Dashboard
                             </button>
-                            <button onClick={() => navigate("/tickets")}>
+                            <button
+                                className={
+                                    pathname === "/tickets" ? "active" : ""
+                                }
+                                onClick={() => navigate("/tickets")}
+                            >
                                 Tickets
                             </button>
                         </>

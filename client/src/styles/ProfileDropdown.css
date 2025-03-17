@@ -44,6 +44,10 @@
 
 .dropdown-menu button:hover {
     color: white;
+    background-color: var(--hover-color);
+}
+
+.dropdown-menu button.active {
     background-color: var(--primary-color);
 }
 
