@@ -141,10 +141,10 @@ export default function Login() {
             <section className="login-section">
                 <div className="form">
                     <div className="label">
-                        <h1>
+                        <h1 style={{ color: "white" }}>
                             <Link to="/">FilmReserve</Link> {loginState}
                         </h1>
-                        <p>
+                        <p style={{ color: "#979494" }}>
                             Welcome{" "}
                             {loginState === "Login" || loginState === "Register"
                                 ? "user"
