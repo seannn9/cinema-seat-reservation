@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "../styles/Navbar.css";
 import logo from "../assets/favicon32.png";
@@ -8,6 +8,8 @@ import ProfileDropdown from "./ProfileDropdown";
 export default function Navbar() {
     const [username, setUsername] = useState("");
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const location = useLocation();
+    const { pathname } = location;
 
     useEffect(() => {
         const userid = localStorage.getItem("userid");
@@ -41,11 +43,12 @@ export default function Navbar() {
                 </Link>
             </div>
             <div className="nav-links">
-                {localStorage.getItem("userid") && (
-                    <Link to="/dashboard" className="dashboard-link">
-                        Dashboard
-                    </Link>
-                )}
+                {localStorage.getItem("userid") &&
+                    pathname !== "/dashboard" && (
+                        <Link to="/dashboard" className="dashboard-link">
+                            Dashboard
+                        </Link>
+                    )}
                 {isLoggedIn ? (
                     <ProfileDropdown username={username} />
                 ) : (
