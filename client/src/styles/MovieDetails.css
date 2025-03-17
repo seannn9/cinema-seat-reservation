@@ -317,7 +317,7 @@
 }
 
 /* Add seat spacing for aisle */
-.seat-row .seat:nth-child(6) {
+.seat-row .seat:nth-child(7) {
     margin-left: 1rem;
 }
 
