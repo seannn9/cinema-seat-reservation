@@ -41,12 +41,12 @@ export default function MovieDetails() {
     }, [movieid]);
 
     useEffect(() => {
-        const userid = localStorage.getItem("userid");
-        if (userid) {
-            console.log("Logged in");
-        } else {
-            navigate("/login");
-        }
+        // const userid = localStorage.getItem("userid");
+        // if (userid) {
+        //     console.log("Logged in");
+        // } else {
+        //     navigate("/login");
+        // }
         localStorage.removeItem("movieToPay");
     }, []);
 
