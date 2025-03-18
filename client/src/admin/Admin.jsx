@@ -29,6 +29,17 @@ export default function Admin() {
         fetchMovies();
     }, []);
 
+    const clearFormData = () => {
+        setFormData({
+            title: "",
+            poster: "",
+            release_date: "",
+            duration: "",
+            genre: "",
+            price: "",
+        });
+    };
+
     const fetchMovies = () => {
         Axios.post("http://localhost:5001/getshowingmovies")
             .then((response) => {
@@ -50,14 +61,7 @@ export default function Admin() {
             .then(() => {
                 setShowAddModal(false);
                 fetchMovies();
-                setFormData({
-                    title: "",
-                    poster: "",
-                    release_date: "",
-                    duration: "",
-                    genre: "",
-                    price: "",
-                });
+                clearFormData();
             })
             .catch((err) => console.error(err));
     };
@@ -71,14 +75,7 @@ export default function Admin() {
             .then(() => {
                 setShowEditModal(false);
                 fetchMovies();
-                setFormData({
-                    title: "",
-                    poster: "",
-                    release_date: "",
-                    duration: "",
-                    genre: "",
-                    price: "",
-                });
+                clearFormData();
             })
             .catch((err) => console.error(err));
     };
@@ -114,7 +111,10 @@ export default function Admin() {
                 <h1 style={{ marginTop: "0" }}>Manage Movies</h1>
                 <button
                     className="add-btn"
-                    onClick={() => setShowAddModal(true)}
+                    onClick={() => {
+                        setShowAddModal(true);
+                        clearFormData();
+                    }}
                 >
                     <FontAwesomeIcon icon="fa-solid fa-plus" /> Add Movie
                 </button>
