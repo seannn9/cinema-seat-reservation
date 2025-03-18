@@ -5,16 +5,29 @@ import Navbar from "../components/Navbar";
 import "../styles/MovieDetails.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+const getNextFourDays = () => {
+    const days = [];
+    for (let i = 0; i < 4; i++) {
+        const date = new Date();
+        date.setDate(date.getDate() + i);
+        days.push(
+            date.toLocaleDateString("en-US", { month: "short", day: "numeric" })
+        );
+    }
+    return days;
+};
+
 export default function MovieDetails() {
     const { movieid } = useParams();
     const navigate = useNavigate();
     const [movieData, setMovieData] = useState(null);
     const [selectedMall, setSelectedMall] = useState("Select Theater");
-    const [selectedDate, setSelectedDate] = useState("Select Date");
+    const [selectedDate, setSelectedDate] = useState(getNextFourDays()[0]);
     const [selectedTime, setSelectedTime] = useState("Select Time");
     const [isDisabled, setIsDisabled] = useState(true);
     const [selectedSeats, setSelectedSeats] = useState("Select Seats");
     const [totalPrice, setTotalPrice] = useState(0);
+    const [availableDates] = useState(getNextFourDays());
 
     useEffect(() => {
         Axios.post(`http://localhost:5001/getmovie/${movieid}`)
@@ -133,42 +146,18 @@ export default function MovieDetails() {
                     >
                         <h2>Date</h2>
                         <div className="date-list">
-                            <h4
-                                onClick={() => setSelectedDate("Feb 21")}
-                                className={
-                                    selectedDate === "Feb 21" ? "active" : ""
-                                }
-                            >
-                                <FontAwesomeIcon icon="fa-solid fa-calendar-days" />
-                                &nbsp; Feb 21
-                            </h4>
-                            <h4
-                                onClick={() => setSelectedDate("Feb 22")}
-                                className={
-                                    selectedDate === "Feb 22" ? "active" : ""
-                                }
-                            >
-                                <FontAwesomeIcon icon="fa-solid fa-calendar-days" />
-                                &nbsp; Feb 22
-                            </h4>
-                            <h4
-                                onClick={() => setSelectedDate("Feb 23")}
-                                className={
-                                    selectedDate === "Feb 23" ? "active" : ""
-                                }
-                            >
-                                <FontAwesomeIcon icon="fa-solid fa-calendar-days" />
-                                &nbsp; Feb 23
-                            </h4>
-                            <h4
-                                onClick={() => setSelectedDate("Feb 24")}
-                                className={
-                                    selectedDate === "Feb 24" ? "active" : ""
-                                }
-                            >
-                                <FontAwesomeIcon icon="fa-solid fa-calendar-days" />
-                                &nbsp; Feb 24
-                            </h4>
+                            {availableDates.map((date) => (
+                                <h4
+                                    key={date}
+                                    onClick={() => setSelectedDate(date)}
+                                    className={
+                                        selectedDate === date ? "active" : ""
+                                    }
+                                >
+                                    <FontAwesomeIcon icon="fa-solid fa-calendar-days" />
+                                    &nbsp; {date}
+                                </h4>
+                            ))}
                         </div>
                     </div>
                     <div
