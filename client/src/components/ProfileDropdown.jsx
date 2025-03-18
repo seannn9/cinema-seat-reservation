@@ -84,6 +84,14 @@ export default function ProfileDropdown({ username }) {
                             >
                                 Tickets
                             </button>
+                            <button
+                                className={
+                                    pathname === "/about" ? "active" : ""
+                                }
+                                onClick={() => navigate("/about")}
+                            >
+                                About
+                            </button>
                         </>
                     )}
                     <button onClick={handleLogout}>Logout</button>
