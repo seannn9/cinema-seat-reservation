@@ -5,7 +5,7 @@ import Axios from "axios";
 import "../styles/Payment.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function PaymentComplete() {
+export default function Payment() {
     const navigate = useNavigate();
     const { state } = useLocation();
     const [paymentStatus, setPaymentStatus] = useState("");
@@ -13,11 +13,14 @@ export default function PaymentComplete() {
     const [paymentMethod, setPaymentMethod] = useState("");
     const [isDisabled, setIsDisabled] = useState(true);
     const [customerName, setCustomerName] = useState("");
-    const [gcashNum, setGcashNum] = useState();
-    const [bankNum, setBankNum] = useState();
-    const [bankRef, setBankRef] = useState();
-    const [creditNum, setCreditNum] = useState();
-    const [cvv, setCvv] = useState();
+    const [gcashNum, setGcashNum] = useState("");
+    const [bankNum, setBankNum] = useState("");
+    const [creditNum, setCreditNum] = useState("");
+    const [cvv, setCvv] = useState("");
+    const [expiryDate, setExpiryDate] = useState("");
+    const [bankName, setBankName] = useState("");
+    const [bankAccountName, setBankAccountName] = useState("");
+    const [gcashAccountName, setGcashAccountName] = useState("");
 
     useEffect(() => {
         const userid = localStorage.getItem("userid");
@@ -38,22 +41,41 @@ export default function PaymentComplete() {
     });
 
     useEffect(() => {
-        setIsDisabled(paymentMethod === "" || customerName === "");
-        if (paymentMethod === "Gcash") {
-            setIsDisabled(!gcashNum);
+        let isFormValid = customerName.trim() !== "";
+
+        if (paymentMethod === "Credit") {
+            isFormValid =
+                isFormValid &&
+                creditNum.replace(/\s/g, "").length === 16 &&
+                expiryDate.length === 5 &&
+                cvv.length === 3;
         } else if (paymentMethod === "Bank") {
-            setIsDisabled(!bankNum || !bankRef);
+            isFormValid =
+                isFormValid &&
+                bankName !== "" &&
+                bankNum.length >= 10 &&
+                bankAccountName.trim() !== "";
+        } else if (paymentMethod === "Gcash") {
+            isFormValid =
+                isFormValid &&
+                gcashNum.length === 11 &&
+                gcashAccountName.trim() !== "";
         } else {
-            setIsDisabled(!creditNum || !cvv);
+            isFormValid = false;
         }
+
+        setIsDisabled(!isFormValid);
     }, [
         paymentMethod,
         customerName,
-        gcashNum,
-        bankNum,
-        bankRef,
         creditNum,
+        expiryDate,
         cvv,
+        bankName,
+        bankNum,
+        bankAccountName,
+        gcashNum,
+        gcashAccountName,
     ]);
 
     const handlePayment = () => {
@@ -90,10 +112,8 @@ export default function PaymentComplete() {
         <div className="payment-container">
             <Navbar />
             <section className="payment-section">
-                {isProcessing && <p>Processing...</p>}
-
                 <div className="payment-method">
-                    <h2>Payment Method</h2>
+                    <h2>Select Payment Method</h2>
                     <div className="methods">
                         <h4
                             onClick={() => setPaymentMethod("Credit")}
@@ -117,109 +137,233 @@ export default function PaymentComplete() {
                                 paymentMethod === "Gcash" ? "active" : ""
                             }
                         >
-                            <FontAwesomeIcon icon="fa-solid fa-wallet" />
-                            {""} GCash
+                            <FontAwesomeIcon icon="fa-solid fa-wallet" /> GCash
                         </h4>
                     </div>
-                    {/* INPUTS */}
-                    {!paymentMethod ? (
-                        <h3>Select a Payment Method</h3>
-                    ) : (
-                        <div className="user-info">
-                            <h4 className="payment-labels">Name</h4>
-                            <input
-                                type="text"
-                                id="fullname"
-                                className="payment-inputs"
-                                value={customerName}
-                                onChange={(e) =>
-                                    setCustomerName(e.target.value.trimStart())
-                                }
-                            />
-                        </div>
-                    )}
-                    {paymentMethod === "Gcash" && (
-                        <div>
-                            <h4 className="payment-labels">GCash Number</h4>
-                            <input
-                                type="tel"
-                                id="gcashnum"
-                                className="payment-inputs"
-                                value={gcashNum}
-                                onChange={(e) =>
-                                    setGcashNum(e.target.value.trim())
-                                }
-                            />
-                        </div>
-                    )}
-                    {paymentMethod === "Bank" && (
-                        <div>
-                            <h4 className="payment-labels">
-                                Bank Account Number
-                            </h4>
-                            <input
-                                type="tel"
-                                id="banknum"
-                                className="payment-inputs"
-                                value={bankNum}
-                                onChange={(e) =>
-                                    setBankNum(e.target.value.trim())
-                                }
-                            />
-                            <h4 className="payment-labels">Reference Number</h4>
-                            <input
-                                type="tel"
-                                id="refnum"
-                                className="payment-inputs"
-                                value={bankRef}
-                                onChange={(e) =>
-                                    setBankRef(e.target.value.trim())
-                                }
-                            />
-                        </div>
-                    )}
+
+                    {/* Common input for all payment methods */}
+                    <div className="user-info">
+                        <h4 className="payment-labels">Name on Card/Account</h4>
+                        <input
+                            type="text"
+                            id="fullname"
+                            className="payment-inputs"
+                            placeholder="Enter the name as it appears on your card/account"
+                            value={customerName}
+                            onChange={(e) =>
+                                setCustomerName(e.target.value.trimStart())
+                            }
+                        />
+                    </div>
+
+                    {/* Credit Card specific inputs */}
                     {paymentMethod === "Credit" && (
-                        <div>
-                            <h4 className="payment-labels">
-                                Credit Card Number
-                            </h4>
-                            <input
-                                type="tel"
-                                id="creditnum"
-                                className="payment-inputs"
-                                value={creditNum}
-                                onChange={(e) =>
-                                    setCreditNum(e.target.value.trim())
-                                }
-                            />
-                            <h4 className="payment-labels">CVV</h4>
-                            <input
-                                type="num"
-                                id="cvv"
-                                className="payment-inputs"
-                                value={cvv}
-                                onChange={(e) => setCvv(e.target.value.trim())}
-                            />
+                        <div className="payment-fields">
+                            <div className="field">
+                                <h4 className="payment-labels">Card Number</h4>
+                                <input
+                                    type="text"
+                                    id="creditnum"
+                                    className="payment-inputs"
+                                    placeholder="1234 5678 9012 3456"
+                                    maxLength="19"
+                                    value={creditNum}
+                                    onChange={(e) => {
+                                        // Format card number with spaces every 4 digits
+                                        const value = e.target.value
+                                            .replace(/\s/g, "")
+                                            .replace(/(\d{4})/g, "$1 ")
+                                            .trim();
+                                        setCreditNum(value);
+                                    }}
+                                />
+                            </div>
+                            <div className="field-group">
+                                <div className="field">
+                                    <h4 className="payment-labels">
+                                        Expiry Date
+                                    </h4>
+                                    <input
+                                        type="text"
+                                        id="expiry"
+                                        className="payment-inputs"
+                                        placeholder="MM/YY"
+                                        maxLength="5"
+                                        value={expiryDate}
+                                        onChange={(e) =>
+                                            setExpiryDate(e.target.value)
+                                        }
+                                    />
+                                </div>
+                                <div className="field">
+                                    <h4 className="payment-labels">CVV</h4>
+                                    <input
+                                        type="password"
+                                        id="cvv"
+                                        className="payment-inputs"
+                                        placeholder="123"
+                                        maxLength="3"
+                                        value={cvv}
+                                        onChange={(e) =>
+                                            setCvv(
+                                                e.target.value.replace(
+                                                    /\D/g,
+                                                    ""
+                                                )
+                                            )
+                                        }
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Bank Transfer specific inputs */}
+                    {paymentMethod === "Bank" && (
+                        <div className="payment-fields">
+                            <div className="field">
+                                <h4 className="payment-labels">Bank Name</h4>
+                                <select
+                                    id="bankName"
+                                    className="payment-inputs"
+                                    value={bankName}
+                                    onChange={(e) =>
+                                        setBankName(e.target.value)
+                                    }
+                                >
+                                    <option value="">Select your bank</option>
+                                    <option value="BDO">BDO</option>
+                                    <option value="BPI">BPI</option>
+                                    <option value="Metrobank">Metrobank</option>
+                                    <option value="UnionBank">UnionBank</option>
+                                    <option value="SecurityBank">
+                                        Security Bank
+                                    </option>
+                                </select>
+                            </div>
+                            <div className="field">
+                                <h4 className="payment-labels">
+                                    Account Number
+                                </h4>
+                                <input
+                                    type="text"
+                                    id="banknum"
+                                    className="payment-inputs"
+                                    placeholder="Enter your account number"
+                                    maxLength="16"
+                                    value={bankNum}
+                                    onChange={(e) =>
+                                        setBankNum(
+                                            e.target.value.replace(/\D/g, "")
+                                        )
+                                    }
+                                />
+                            </div>
+                            <div className="field">
+                                <h4 className="payment-labels">Account Name</h4>
+                                <input
+                                    type="text"
+                                    id="bankAccountName"
+                                    className="payment-inputs"
+                                    placeholder="Enter account holder name"
+                                    value={bankAccountName}
+                                    onChange={(e) =>
+                                        setBankAccountName(e.target.value)
+                                    }
+                                />
+                            </div>
+                        </div>
+                    )}
+
+                    {/* GCash specific inputs */}
+                    {paymentMethod === "Gcash" && (
+                        <div className="payment-fields">
+                            <div className="field">
+                                <h4 className="payment-labels">GCash Number</h4>
+                                <input
+                                    type="tel"
+                                    id="gcashnum"
+                                    className="payment-inputs"
+                                    placeholder="09XX XXX XXXX"
+                                    maxLength="11"
+                                    value={gcashNum}
+                                    onChange={(e) => {
+                                        const value = e.target.value.replace(
+                                            /\D/g,
+                                            ""
+                                        );
+                                        setGcashNum(value);
+                                    }}
+                                />
+                            </div>
+                            <div className="field">
+                                <h4 className="payment-labels">
+                                    GCash Account Name
+                                </h4>
+                                <input
+                                    type="text"
+                                    id="gcashName"
+                                    className="payment-inputs"
+                                    placeholder="Enter GCash account name"
+                                    value={gcashAccountName}
+                                    onChange={(e) =>
+                                        setGcashAccountName(e.target.value)
+                                    }
+                                />
+                            </div>
                         </div>
                     )}
                 </div>
+
                 <div className="order-summary">
-                    <h2>Booking Detail</h2>
-                    <h3>Schedule</h3>
-                    <p>Movie Title</p>
-                    <h3>{state.movie}</h3>
-                    <p>Date</p>
-                    <h3>{state.date}</h3>
-                    <p>Seats</p>
-                    <h3>{state.seats}</h3>
-                    <p>Total Price</p>
-                    <h3>₱{state.price}</h3>
+                    <h2>Booking Details</h2>
+                    <div className="summary-details">
+                        <div className="summary-item">
+                            <span className="label">Movie Title</span>
+                            <span className="value">{state.movie}</span>
+                        </div>
+                        <div className="summary-item">
+                            <span className="label">
+                                <FontAwesomeIcon icon="fa-solid fa-location-dot" />{" "}
+                                Location
+                            </span>
+                            <span className="value">{state.location}</span>
+                        </div>
+                        <div className="summary-item">
+                            <span className="label">
+                                <FontAwesomeIcon icon="fa-solid fa-calendar-days" />{" "}
+                                Date
+                            </span>
+                            <span className="value">{state.date}</span>
+                        </div>
+                        <div className="summary-item">
+                            <span className="label">
+                                <FontAwesomeIcon icon="fa-solid fa-clock" />{" "}
+                                Time
+                            </span>
+                            <span className="value">{state.time}</span>
+                        </div>
+                        <div className="summary-item">
+                            <span className="label">
+                                <FontAwesomeIcon icon="fa-solid fa-couch" />{" "}
+                                Seats
+                            </span>
+                            <span className="value">{state.seats}</span>
+                        </div>
+                        <div className="summary-item total">
+                            <span className="label">
+                                <FontAwesomeIcon icon="fa-solid fa-peso-sign" />{" "}
+                                Total Price
+                            </span>
+                            <span className="value">₱{state.price}</span>
+                        </div>
+                    </div>
                     <button
                         onClick={handlePayment}
                         disabled={isDisabled}
                         className={isDisabled ? "disabled" : ""}
                     >
-                        Pay Now
+                        {isProcessing ? "Processing..." : "Pay Now"}
                     </button>
                 </div>
             </section>
