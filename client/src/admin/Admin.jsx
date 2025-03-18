@@ -108,7 +108,12 @@ export default function Admin() {
         <div className="admin-container">
             <Navbar />
             <div className="admin-content">
-                <h1 style={{ marginTop: "0" }}>Manage Movies</h1>
+                <h1 style={{ marginTop: "0" }}>
+                    Manage{" "}
+                    <span style={{ color: "var(--primary-color)" }}>
+                        Movies
+                    </span>
+                </h1>
                 <button
                     className="add-btn"
                     onClick={() => {
