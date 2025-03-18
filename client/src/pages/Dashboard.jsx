@@ -41,7 +41,9 @@ export default function Dashboard() {
         <div className="dashboard-container">
             <Navbar />
             <section className="dashboard-section">
-                <h1>Now Showing</h1>
+                <h1>
+                    <span style={{ color: "white" }}>Now</span> Showing
+                </h1>
                 <div className="movies">
                     {isLoading ? (
                         // Loading skeleton
