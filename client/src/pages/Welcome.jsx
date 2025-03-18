@@ -23,7 +23,7 @@ export default function Welcome() {
                     <div className="cta-container">
                         <button
                             className="welcome-btn primary"
-                            onClick={() => navigate("/login")}
+                            onClick={() => navigate("/dashboard")}
                         >
                             Get Started
                         </button>
