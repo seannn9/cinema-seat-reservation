@@ -142,7 +142,7 @@ export default function Login() {
                 <div className="form">
                     <div className="label">
                         <h1 style={{ color: "white" }}>
-                            <Link to="/">FilmReserve</Link> {loginState}
+                            <Link to="/">ReelTime</Link> {loginState}
                         </h1>
                         <p style={{ color: "#979494" }}>
                             Welcome{" "}

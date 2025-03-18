@@ -35,9 +35,9 @@ export default function Navbar() {
                 <Link to="/">
                     <img src={logo} alt="logo" />
                     <h1>
-                        Film
+                        Reel
                         <span style={{ color: "var(--primary-color)" }}>
-                            Reserve
+                            Time
                         </span>
                     </h1>
                 </Link>
