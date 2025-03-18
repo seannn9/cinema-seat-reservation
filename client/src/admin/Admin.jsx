@@ -165,54 +165,86 @@ export default function Admin() {
                         <div className="modal-content">
                             <h2>Add New Movie</h2>
                             <form onSubmit={handleAddMovie}>
-                                <input
-                                    type="text"
-                                    name="title"
-                                    placeholder="Movie Title"
-                                    value={formData.title}
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                                <input
-                                    type="text"
-                                    name="poster"
-                                    placeholder="Poster URL"
-                                    value={formData.poster}
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                                <input
-                                    type="text"
-                                    name="release_date"
-                                    placeholder="Release Date"
-                                    value={formData.release_date}
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                                <input
-                                    type="text"
-                                    name="duration"
-                                    placeholder="Duration"
-                                    value={formData.duration}
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                                <input
-                                    type="text"
-                                    name="genre"
-                                    placeholder="Genre"
-                                    value={formData.genre}
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                                <input
-                                    type="number"
-                                    name="price"
-                                    placeholder="Price"
-                                    value={formData.price}
-                                    onChange={handleInputChange}
-                                    required
-                                />
+                                <div className="form-field">
+                                    <input
+                                        type="text"
+                                        name="title"
+                                        id="add-title"
+                                        value={formData.title}
+                                        onChange={handleInputChange}
+                                        placeholder="Movie Title"
+                                        required
+                                    />
+                                    <label htmlFor="add-title">
+                                        Movie Title
+                                    </label>
+                                </div>
+                                <div className="form-field">
+                                    <input
+                                        type="text"
+                                        name="poster"
+                                        id="add-poster"
+                                        value={formData.poster}
+                                        onChange={handleInputChange}
+                                        placeholder="Poster URL"
+                                        required
+                                    />
+                                    <label htmlFor="add-poster">
+                                        Poster URL
+                                    </label>
+                                </div>
+                                <div className="form-field">
+                                    <input
+                                        type="text"
+                                        name="release_date"
+                                        id="add-release_date"
+                                        value={formData.release_date}
+                                        onChange={handleInputChange}
+                                        placeholder="Release Date"
+                                        required
+                                    />
+                                    <label htmlFor="add-release_date">
+                                        Release Date
+                                    </label>
+                                </div>
+                                <div className="form-field">
+                                    <input
+                                        type="text"
+                                        name="duration"
+                                        id="add-duration"
+                                        value={formData.duration}
+                                        onChange={handleInputChange}
+                                        placeholder="Duration"
+                                        required
+                                    />
+                                    <label htmlFor="add-duration">
+                                        Duration
+                                    </label>
+                                </div>
+                                <div className="form-field">
+                                    <input
+                                        type="text"
+                                        name="genre"
+                                        id="add-genre"
+                                        value={formData.genre}
+                                        onChange={handleInputChange}
+                                        placeholder="Genre"
+                                        required
+                                    />
+                                    <label htmlFor="add-genre">Genre</label>
+                                </div>
+                                <div className="form-field">
+                                    <input
+                                        type="number"
+                                        name="price"
+                                        id="add-price"
+                                        value={formData.price}
+                                        onChange={handleInputChange}
+                                        placeholder="Price"
+                                        required
+                                    />
+                                    <label htmlFor="add-price">Price</label>
+                                </div>
                                 <div className="modal-buttons">
                                     <button type="submit">Add Movie</button>
                                     <button
@@ -233,54 +265,86 @@ export default function Admin() {
                         <div className="modal-content">
                             <h2>Edit Movie</h2>
                             <form onSubmit={handleEditMovie}>
-                                <input
-                                    type="text"
-                                    name="title"
-                                    placeholder="Movie Title"
-                                    value={formData.title}
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                                <input
-                                    type="text"
-                                    name="poster"
-                                    placeholder="Poster URL"
-                                    value={formData.poster}
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                                <input
-                                    type="text"
-                                    name="release_date"
-                                    placeholder="Release Date"
-                                    value={formData.release_date}
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                                <input
-                                    type="text"
-                                    name="duration"
-                                    placeholder="Duration"
-                                    value={formData.duration}
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                                <input
-                                    type="text"
-                                    name="genre"
-                                    placeholder="Genre"
-                                    value={formData.genre}
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                                <input
-                                    type="number"
-                                    name="price"
-                                    placeholder="Price"
-                                    value={formData.price}
-                                    onChange={handleInputChange}
-                                    required
-                                />
+                                <div className="form-field">
+                                    <input
+                                        type="text"
+                                        name="title"
+                                        id="edit-title"
+                                        value={formData.title}
+                                        onChange={handleInputChange}
+                                        placeholder="Movie Title"
+                                        required
+                                    />
+                                    <label htmlFor="edit-title">
+                                        Movie Title
+                                    </label>
+                                </div>
+                                <div className="form-field">
+                                    <input
+                                        type="text"
+                                        name="poster"
+                                        id="edit-poster"
+                                        value={formData.poster}
+                                        onChange={handleInputChange}
+                                        placeholder="Poster URL"
+                                        required
+                                    />
+                                    <label htmlFor="edit-poster">
+                                        Poster URL
+                                    </label>
+                                </div>
+                                <div className="form-field">
+                                    <input
+                                        type="text"
+                                        name="release_date"
+                                        id="edit-release_date"
+                                        value={formData.release_date}
+                                        onChange={handleInputChange}
+                                        placeholder="Release Date"
+                                        required
+                                    />
+                                    <label htmlFor="edit-release_date">
+                                        Release Date
+                                    </label>
+                                </div>
+                                <div className="form-field">
+                                    <input
+                                        type="text"
+                                        name="duration"
+                                        id="edit-duration"
+                                        value={formData.duration}
+                                        onChange={handleInputChange}
+                                        placeholder="Duration"
+                                        required
+                                    />
+                                    <label htmlFor="edit-duration">
+                                        Duration
+                                    </label>
+                                </div>
+                                <div className="form-field">
+                                    <input
+                                        type="text"
+                                        name="genre"
+                                        id="edit-genre"
+                                        value={formData.genre}
+                                        onChange={handleInputChange}
+                                        placeholder="Genre"
+                                        required
+                                    />
+                                    <label htmlFor="edit-genre">Genre</label>
+                                </div>
+                                <div className="form-field">
+                                    <input
+                                        type="number"
+                                        name="price"
+                                        id="edit-price"
+                                        value={formData.price}
+                                        onChange={handleInputChange}
+                                        placeholder="Price"
+                                        required
+                                    />
+                                    <label htmlFor="edit-price">Price</label>
+                                </div>
                                 <div className="modal-buttons">
                                     <button>Update Movie</button>
                                     <button
