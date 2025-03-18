@@ -1,4 +1,4 @@
-# Cinema Seat Reservation Website (FilmReserve)
+# Cinema Seat Reservation Website (ReelTime)
 
 This is a prototype of an online cinema seat reservation for our Software Engineering course.
 
@@ -9,8 +9,9 @@ TODOS:
 - [x] Redirect to ticket reserving page when clicking on a movie card
 - [x] Working Seat selection/reservation
 - [x] Add a checkout and ticket system then store in database
+- [x] Admin page for CRUD operations
 - [ ] Working dummy payment system
-- [ ] Admin page for CRUD operations
+- [ ] Dummy QR Code System for tickets
 
 Tech Used:
 - React JS
