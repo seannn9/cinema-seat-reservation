@@ -12,6 +12,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: #242424;
 }
 
 .form {
@@ -121,8 +122,9 @@ form button {
 }
 
 form button:hover {
-    background-color: transparent;
-    color: var(--primary-color);
+    background-color: var(--hover-color);
+    border-color: var(--hover-color);
+    color: #fff;
 }
 
 @media (max-width: 769px) {
@@ -135,7 +137,6 @@ form button:hover {
     }
 
     .login-section {
-        background-color: #333;
         width: 480px;
         min-height: 520px;
         margin: 0 1em;
