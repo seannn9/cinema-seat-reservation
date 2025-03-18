@@ -29,9 +29,9 @@ export default function Welcome() {
                         </button>
                         <button
                             className="welcome-btn secondary"
-                            onClick={() => navigate("/dashboard")}
+                            onClick={() => navigate("/about")}
                         >
-                            Browse Movies
+                            Learn More
                         </button>
                     </div>
                 </div>
