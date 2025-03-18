@@ -34,7 +34,7 @@ function App() {
                 <Route path="/admin" element={<Admin />} />
             </Routes>
             <ToastContainer
-                autoClose={3000}
+                autoClose={1500}
                 closeOnClick={true}
                 theme="colored"
                 pauseOnFocusLoss={false}
