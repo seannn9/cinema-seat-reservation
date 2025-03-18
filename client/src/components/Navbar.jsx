@@ -44,7 +44,8 @@ export default function Navbar() {
             </div>
             <div className="nav-links">
                 {localStorage.getItem("userid") &&
-                    pathname !== "/dashboard" && (
+                    pathname !== "/dashboard" &&
+                    pathname !== "/" && (
                         <Link to="/dashboard" className="dashboard-link">
                             Dashboard
                         </Link>
