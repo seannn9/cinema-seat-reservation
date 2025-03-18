@@ -262,14 +262,20 @@ export default function MovieDetails() {
                                     <span className="bold">Genre:</span>{" "}
                                     {movieData.genre}
                                 </p>
-                                <p>
+                                <p style={{ position: "relative" }}>
                                     <span className="bold">Release:</span>{" "}
                                     {movieData.release_date}
-                                    &nbsp;&nbsp;|&nbsp;&nbsp;{" "}
-                                    <span className="bold">
-                                        Ticket Price:
-                                    </span>{" "}
-                                    ₱{movieData.price}{" "}
+                                    <span
+                                        style={{
+                                            right: "0",
+                                            position: "absolute",
+                                        }}
+                                    >
+                                        <span className="bold">
+                                            Ticket Price:
+                                        </span>{" "}
+                                        ₱{movieData.price}
+                                    </span>
                                 </p>
                             </div>
                         </div>
