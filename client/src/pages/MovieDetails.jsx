@@ -22,7 +22,7 @@ export default function MovieDetails() {
     const navigate = useNavigate();
     const [movieData, setMovieData] = useState(null);
     const [selectedMall, setSelectedMall] = useState("Select Theater");
-    const [selectedDate, setSelectedDate] = useState(getNextFourDays()[0]);
+    const [selectedDate, setSelectedDate] = useState();
     const [selectedTime, setSelectedTime] = useState("Select Time");
     const [isDisabled, setIsDisabled] = useState(true);
     const [selectedSeats, setSelectedSeats] = useState("Select Seats");
