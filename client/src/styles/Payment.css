@@ -146,7 +146,7 @@ select.payment-inputs option {
     color: var(--primary-color);
 }
 
-button {
+.order-summary button {
     width: 100%;
     border: none;
     border-radius: var(--border-radius);
@@ -158,11 +158,11 @@ button {
     transition: all 0.2s;
 }
 
-button:hover:not(.disabled) {
+.order-summary button:hover:not(.disabled) {
     background-color: var(--hover-color);
 }
 
-button.disabled {
+.order-summary button.disabled {
     background-color: #333;
     color: #bababa;
     cursor: not-allowed;
