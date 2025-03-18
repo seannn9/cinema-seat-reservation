@@ -86,7 +86,16 @@ export default function Login() {
                 if (result.data.message === "Login success") {
                     toast.success("Login successful!");
                     localStorage.setItem("userid", result.data.userid);
-                    navigate("/dashboard");
+                    // check if user logged in after trying to pay while logged out. If true, navigate back to that movie detail page after logging in.
+                    if (localStorage.getItem("loginBeforePay") === "true") {
+                        navigate(
+                            `/movie-details/${localStorage.getItem(
+                                "movieToPay"
+                            )}`
+                        );
+                    } else {
+                        navigate("/dashboard");
+                    }
                 }
             })
             .catch((error) => {
