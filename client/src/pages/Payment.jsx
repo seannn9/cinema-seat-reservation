@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Axios from "axios";
 import "../styles/Payment.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { toast } from "react-toastify";
 
 export default function Payment() {
     const navigate = useNavigate();
@@ -27,6 +28,7 @@ export default function Payment() {
         if (userid) {
             console.log("Logged in");
         } else {
+            localStorage.setItem("loginBeforePay", "true");
             navigate("/login");
         }
     }, []);
@@ -38,7 +40,7 @@ export default function Payment() {
         } else {
             navigate("/dashboard");
         }
-    });
+    }, []);
 
     useEffect(() => {
         let isFormValid = customerName.trim() !== "";
