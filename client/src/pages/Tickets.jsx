@@ -1,3 +1,4 @@
+import { QRCodeSVG } from "qrcode.react";
 import Axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +9,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function Tickets() {
     const [tickets, setTickets] = useState([]);
     const [username, setUsername] = useState("");
+    const [selectedTicket, setSelectedTicket] = useState(null);
+    const [showQRModal, setShowQRModal] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -26,6 +29,11 @@ export default function Tickets() {
         }
     }, []);
 
+    const handleTicketClick = (ticket) => {
+        setSelectedTicket(ticket);
+        setShowQRModal(true);
+    };
+
     return (
         <div className="tickets-container">
             <Navbar />
@@ -40,7 +48,12 @@ export default function Tickets() {
                 )}
                 <div className="tickets">
                     {tickets.map((ticket, key) => (
-                        <div className="ticket" key={key}>
+                        <div
+                            className="ticket"
+                            key={key}
+                            onClick={() => handleTicketClick(ticket)}
+                            style={{ cursor: "pointer" }}
+                        >
                             <div className="ticket-header">
                                 <span className="ticket-number">
                                     #{ticket.ticketid}
@@ -117,6 +130,35 @@ export default function Tickets() {
                     ))}
                 </div>
             </div>
+
+            {/* QR Code Modal */}
+            {showQRModal && selectedTicket && (
+                <div className="modal-overlay">
+                    <div className="qr-modal">
+                        <h2>Ticket #{selectedTicket.ticketid}</h2>
+                        <div className="qr-code">
+                            <QRCodeSVG
+                                value={JSON.stringify({
+                                    ticketId: selectedTicket.ticketid,
+                                    movie: selectedTicket.movie,
+                                    location: selectedTicket.location,
+                                    date: selectedTicket.date,
+                                    time: selectedTicket.time,
+                                    seats: selectedTicket.seats,
+                                })}
+                                size={200}
+                                level="H"
+                            />
+                        </div>
+                        <p className="qr-info">
+                            Scan this QR code at the theater
+                        </p>
+                        <button onClick={() => setShowQRModal(false)}>
+                            Close
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

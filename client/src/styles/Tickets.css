@@ -152,3 +152,59 @@
         padding: 0.5rem;
     }
 }
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.qr-modal {
+    background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+    border: 2px solid var(--primary-color);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    max-width: 90%;
+    width: 400px;
+}
+
+.qr-modal h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.qr-code {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.qr-info {
+    color: #bababa;
+    margin-bottom: 1.5rem;
+}
+
+.qr-modal button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.qr-modal button:hover {
+    background: var(--hover-color);
+    transform: translateY(-2px);
+}
