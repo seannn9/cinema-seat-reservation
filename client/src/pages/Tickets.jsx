@@ -14,7 +14,6 @@ export default function Tickets() {
         const userid = localStorage.getItem("userid");
         if (userid) {
             console.log("Logged in");
-
             setUsername(localStorage.getItem("username"));
 
             Axios.post("http://localhost:5001/getusertickets", {
@@ -22,10 +21,6 @@ export default function Tickets() {
             }).then((response) => {
                 setTickets(response.data);
             });
-
-            if (tickets.length === 0) {
-                console.log("No tickets found");
-            }
         } else {
             navigate("/login");
         }
@@ -38,6 +33,11 @@ export default function Tickets() {
                 <h1>
                     <span style={{ color: "white" }}>{username}'s</span> Tickets
                 </h1>
+                {tickets.length === 0 && (
+                    <h2 style={{ fontStyle: "italic", color: "#979494" }}>
+                        No Tickets Found
+                    </h2>
+                )}
                 <div className="tickets">
                     {tickets.map((ticket, key) => (
                         <div className="ticket" key={key}>
