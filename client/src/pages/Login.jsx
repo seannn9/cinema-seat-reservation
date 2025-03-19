@@ -53,7 +53,9 @@ export default function Login() {
         })
             .then((result) => {
                 if (result.data === "Account creation successful!") {
-                    navigate("/dashboard");
+                    // navigate("/dashboard");
+                    clearAll();
+                    setLoginState("Login");
                     toast.success("Account created successfully!");
                 }
             })
