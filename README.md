@@ -10,8 +10,8 @@ TODOS:
 - [x] Working Seat selection/reservation
 - [x] Add a checkout and ticket system then store in database
 - [x] Admin page for CRUD operations
-- [ ] Working dummy payment system
-- [ ] Dummy QR Code System for tickets
+- [x] Working dummy payment system
+- [x] Dummy QR Code System for tickets
 
 Tech Used:
 - React JS
