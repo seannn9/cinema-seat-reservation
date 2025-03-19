@@ -99,6 +99,18 @@ export default function Tickets() {
                                             ₱{ticket.price}
                                         </span>
                                     </div>
+                                    <div className="info-item">
+                                        <FontAwesomeIcon
+                                            icon="fa-solid fa-wallet"
+                                            className="info-icon"
+                                        />
+                                        <span className="label">
+                                            Payment Method
+                                        </span>
+                                        <span className="value">
+                                            {ticket.payment_method}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

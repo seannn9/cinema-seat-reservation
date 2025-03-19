@@ -90,6 +90,7 @@ export default function Payment() {
                 time: state.time,
                 seats: state.seats,
                 price: state.price,
+                payment_method: paymentMethod,
                 userid: localStorage.getItem("userid"),
             })
                 .then((response) => {
