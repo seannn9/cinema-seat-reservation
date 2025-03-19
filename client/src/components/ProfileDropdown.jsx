@@ -62,21 +62,24 @@ export default function ProfileDropdown({ username }) {
                 />
             </button>
             {isOpen && (
-                <div
-                    className="dropdown-menu"
-                    style={{ right: isAdmin ? "20%" : "0" }}
-                >
+                <div className="dropdown-menu">
                     <p style={{ color: "var(--primary-color)" }}>{username}</p>
+                    {isAdmin && (
+                        <button
+                            className={pathname === "/admin" ? "active" : ""}
+                            onClick={() => navigate("/admin")}
+                        >
+                            Manage
+                        </button>
+                    )}
+                    <button
+                        className={pathname === "/dashboard" ? "active" : ""}
+                        onClick={() => navigate("/dashboard")}
+                    >
+                        Dashboard
+                    </button>
                     {!isAdmin && (
                         <>
-                            <button
-                                className={
-                                    pathname === "/dashboard" ? "active" : ""
-                                }
-                                onClick={() => navigate("/dashboard")}
-                            >
-                                Dashboard
-                            </button>
                             <button
                                 className={
                                     pathname === "/tickets" ? "active" : ""
