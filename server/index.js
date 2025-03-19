@@ -242,6 +242,28 @@ app.post("/deletemovie/:movieid", (req, res) => {
     });
 });
 
+app.post("/getreservedseats", (req, res) => {
+    const { movieid, location, date, time } = req.body;
+
+    db.query(
+        "SELECT seats FROM tickets WHERE movie = (SELECT title FROM movies WHERE movieid = ?) AND location = ? AND date = ? AND time = ?",
+        [movieid, location, date, time],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).send("Server error.");
+            }
+
+            // Remove spaces and commas then combine all reserved seats into a single array
+            const reservedSeats = result.reduce((acc, ticket) => {
+                return [...acc, ...ticket.seats.split(", ")];
+            }, []);
+
+            res.send(reservedSeats);
+        }
+    );
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
