@@ -4,6 +4,7 @@ import Axios from "axios";
 import Navbar from "../components/Navbar";
 import "../styles/Admin.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { toast } from "react-toastify";
 
 export default function Admin() {
     const navigate = useNavigate();
@@ -62,6 +63,7 @@ export default function Admin() {
                 setShowAddModal(false);
                 fetchMovies();
                 clearFormData();
+                toast.success("Successfully added movie");
             })
             .catch((err) => console.error(err));
     };
@@ -76,6 +78,7 @@ export default function Admin() {
                 setShowEditModal(false);
                 fetchMovies();
                 clearFormData();
+                toast.success("Successfully updated movie");
             })
             .catch((err) => console.error(err));
     };
@@ -89,6 +92,7 @@ export default function Admin() {
             .then(() => {
                 setShowDeleteModal(false);
                 fetchMovies();
+                toast.success("Successfully deleted movie");
             })
             .catch((err) => console.error(err));
     };
@@ -123,7 +127,11 @@ export default function Admin() {
                 >
                     <FontAwesomeIcon icon="fa-solid fa-plus" /> Add Movie
                 </button>
-
+                {movies.length === 0 && (
+                    <h2 style={{ fontStyle: "italic", color: "#979494" }}>
+                        No Movies Yet. Start Adding Some.
+                    </h2>
+                )}
                 <div className="movies-table">
                     <table>
                         <thead>
