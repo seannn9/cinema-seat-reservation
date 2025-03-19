@@ -358,6 +358,11 @@
     border: 2px solid var(--primary-color);
 }
 
+.legend-reserved {
+    background-color: #ff4444;
+    border: 2px solid #cc0000;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .seat-layout {
@@ -423,4 +428,21 @@
         width: 20px;
         height: 18px;
     }
+}
+
+.seat.reserved {
+    background-color: #ff4444;
+    border-color: #cc0000;
+    color: white;
+    cursor: not-allowed;
+}
+
+.seat.reserved::after {
+    background-color: #cc0000;
+}
+
+.seat.reserved:hover {
+    background-color: #ff4444;
+    border-color: #cc0000;
+    transform: none;
 }

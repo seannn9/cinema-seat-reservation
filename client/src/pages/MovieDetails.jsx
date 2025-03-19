@@ -26,6 +26,7 @@ export default function MovieDetails() {
     const [selectedTime, setSelectedTime] = useState("Select Time");
     const [isDisabled, setIsDisabled] = useState(true);
     const [selectedSeats, setSelectedSeats] = useState("Select Seats");
+    const [reservedSeats, setReservedSeats] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const [availableDates] = useState(getNextFourDays());
 
@@ -58,6 +59,28 @@ export default function MovieDetails() {
                 selectedSeats === "Select Seats"
         );
     }, [selectedMall, selectedDate, selectedTime, selectedSeats]);
+
+    useEffect(() => {
+        if (
+            movieData &&
+            selectedMall !== "Select Theater" &&
+            selectedDate !== "Select Date" &&
+            selectedTime !== "Select Time"
+        ) {
+            Axios.post("http://localhost:5001/getreservedseats", {
+                movieid: movieid,
+                location: selectedMall,
+                date: selectedDate,
+                time: selectedTime,
+            })
+                .then((response) => {
+                    setReservedSeats(response.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
+    }, [movieid, selectedMall, selectedDate, selectedTime, movieData]);
 
     if (!movieData) {
         return null;
@@ -211,25 +234,36 @@ export default function MovieDetails() {
                                 <div key={row} className="seat-row">
                                     <div className="row-label">{row}</div>
                                     {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(
-                                        (seat) => (
-                                            <div
-                                                key={`${row}${seat}`}
-                                                className={`seat ${
-                                                    selectedSeats.includes(
-                                                        `${row}${seat}`
-                                                    )
-                                                        ? "selected"
-                                                        : ""
-                                                }`}
-                                                onClick={() =>
-                                                    handleSeatClick(
-                                                        `${row}${seat}`
-                                                    )
-                                                }
-                                            >
-                                                {seat}
-                                            </div>
-                                        )
+                                        (seat) => {
+                                            const seatId = `${row}${seat}`;
+                                            const isReserved =
+                                                reservedSeats.includes(seatId);
+                                            return (
+                                                <div
+                                                    key={seatId}
+                                                    className={`seat ${
+                                                        selectedSeats.includes(
+                                                            seatId
+                                                        )
+                                                            ? "selected"
+                                                            : isReserved
+                                                            ? "reserved"
+                                                            : ""
+                                                    }`}
+                                                    onClick={() =>
+                                                        !isReserved &&
+                                                        handleSeatClick(seatId)
+                                                    }
+                                                    style={{
+                                                        cursor: isReserved
+                                                            ? "not-allowed"
+                                                            : "pointer",
+                                                    }}
+                                                >
+                                                    {seat}
+                                                </div>
+                                            );
+                                        }
                                     )}
                                 </div>
                             ))}
@@ -242,6 +276,10 @@ export default function MovieDetails() {
                             <div className="legend-item">
                                 <div className="legend-seat legend-selected"></div>
                                 <span>Selected</span>
+                            </div>
+                            <div className="legend-item">
+                                <div className="legend-seat legend-reserved"></div>
+                                <span>Reserved</span>
                             </div>
                         </div>
                     </div>
