@@ -98,6 +98,13 @@
 }
 
 @media (max-width: 480px) {
+    .dashboard-container,
+    .movie-details-container,
+    .payment-container,
+    .tickets-container {
+        min-width: fit-content;
+    }
+
     .dashboard-section {
         padding: 1rem;
     }
