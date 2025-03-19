@@ -4,7 +4,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Axios from "axios";
 import "../styles/Payment.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { toast } from "react-toastify";
 
 export default function Payment() {
     const navigate = useNavigate();
@@ -22,6 +21,8 @@ export default function Payment() {
     const [bankName, setBankName] = useState("");
     const [bankAccountName, setBankAccountName] = useState("");
     const [gcashAccountName, setGcashAccountName] = useState("");
+    const [showPaymentModal, setShowPaymentModal] = useState(false);
+    const [movieDetails, setMovieDetails] = useState(null);
 
     useEffect(() => {
         const userid = localStorage.getItem("userid");
@@ -40,7 +41,7 @@ export default function Payment() {
         } else {
             navigate("/dashboard");
         }
-    }, []);
+    });
 
     useEffect(() => {
         let isFormValid = customerName.trim() !== "";
@@ -80,16 +81,25 @@ export default function Payment() {
         gcashAccountName,
     ]);
 
-    const handlePayment = () => {
-        if (!isProcessing) {
-            setIsProcessing(true);
-            Axios.post("http://localhost:5001/processpayment", {
+    useEffect(() => {
+        if (state) {
+            setMovieDetails({
                 movie: state.movie,
                 location: state.location,
                 date: state.date,
                 time: state.time,
                 seats: state.seats,
                 price: state.price,
+            });
+        }
+    }, [state]);
+
+    const handlePayment = (e) => {
+        e.preventDefault();
+        if (!isProcessing && movieDetails) {
+            setIsProcessing(true);
+            Axios.post("http://localhost:5001/processpayment", {
+                ...movieDetails,
                 payment_method: paymentMethod,
                 userid: localStorage.getItem("userid"),
             })
@@ -100,6 +110,7 @@ export default function Payment() {
                         navigate("/tickets");
                     } else {
                         setPaymentStatus("Payment failed!");
+                        console.log(paymentStatus);
                     }
                 })
                 .catch((err) => {
@@ -323,46 +334,50 @@ export default function Payment() {
                     <div className="summary-details">
                         <div className="summary-item">
                             <span className="label">Movie Title</span>
-                            <span className="value">{state.movie}</span>
+                            <span className="value">{movieDetails?.movie}</span>
                         </div>
                         <div className="summary-item">
                             <span className="label">
                                 <FontAwesomeIcon icon="fa-solid fa-location-dot" />{" "}
                                 Location
                             </span>
-                            <span className="value">{state.location}</span>
+                            <span className="value">
+                                {movieDetails?.location}
+                            </span>
                         </div>
                         <div className="summary-item">
                             <span className="label">
                                 <FontAwesomeIcon icon="fa-solid fa-calendar-days" />{" "}
                                 Date
                             </span>
-                            <span className="value">{state.date}</span>
+                            <span className="value">{movieDetails?.date}</span>
                         </div>
                         <div className="summary-item">
                             <span className="label">
                                 <FontAwesomeIcon icon="fa-solid fa-clock" />{" "}
                                 Time
                             </span>
-                            <span className="value">{state.time}</span>
+                            <span className="value">{movieDetails?.time}</span>
                         </div>
                         <div className="summary-item">
                             <span className="label">
                                 <FontAwesomeIcon icon="fa-solid fa-couch" />{" "}
                                 Seats
                             </span>
-                            <span className="value">{state.seats}</span>
+                            <span className="value">{movieDetails?.seats}</span>
                         </div>
                         <div className="summary-item total">
                             <span className="label">
                                 <FontAwesomeIcon icon="fa-solid fa-peso-sign" />{" "}
                                 Total Price
                             </span>
-                            <span className="value">₱{state.price}</span>
+                            <span className="value">
+                                ₱{movieDetails?.price}
+                            </span>
                         </div>
                     </div>
                     <button
-                        onClick={handlePayment}
+                        onClick={() => setShowPaymentModal(true)}
                         disabled={isDisabled}
                         className={isDisabled ? "disabled" : ""}
                     >
@@ -370,6 +385,32 @@ export default function Payment() {
                     </button>
                 </div>
             </section>
+            {showPaymentModal && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <h2>Confirm Payment</h2>
+                        <p
+                            style={{
+                                fontWeight: "bold",
+                                color: "var(--primary-color)",
+                            }}
+                        >
+                            Total: ₱{movieDetails?.price}
+                        </p>
+                        <form onSubmit={handlePayment}>
+                            <div className="modal-buttons">
+                                <button type="submit">Pay Now</button>
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPaymentModal(false)}
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
