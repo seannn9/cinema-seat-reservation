@@ -6,6 +6,7 @@ import "../styles/ProfileDropdown.css";
 export default function ProfileDropdown({ username }) {
     const [isOpen, setIsOpen] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
+    const [showLogoutModal, setShowLogoutModal] = useState(false);
     const dropdownRef = useRef(null);
     const navigate = useNavigate();
     const location = useLocation();
@@ -94,7 +95,33 @@ export default function ProfileDropdown({ username }) {
                             </button>
                         </>
                     )}
-                    <button onClick={handleLogout}>Logout</button>
+                    <button onClick={() => setShowLogoutModal(true)}>
+                        Logout
+                    </button>
+                </div>
+            )}
+            {showLogoutModal && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <h2>
+                            Log out of{" "}
+                            <span style={{ color: "var(--primary-color)" }}>
+                                ReelTime
+                            </span>
+                            ?
+                        </h2>
+                        <form onSubmit={handleLogout}>
+                            <div className="modal-buttons">
+                                <button type="submit">Log Out</button>
+                                <button
+                                    type="button"
+                                    onClick={() => setShowLogoutModal(false)}
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             )}
         </div>
