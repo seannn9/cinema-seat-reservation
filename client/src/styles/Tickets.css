@@ -31,7 +31,7 @@
     border: 2px solid rgba(var(--primary-color-rgb), 0.3);
     border-radius: 16px;
     padding: 2rem;
-    max-width: 500px;
+    width: 100%;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
     overflow: hidden;
@@ -142,5 +142,13 @@
 
     .movie-title {
         font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .tickets {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0.5rem;
     }
 }
