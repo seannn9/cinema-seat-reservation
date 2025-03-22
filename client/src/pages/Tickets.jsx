@@ -146,8 +146,16 @@ export default function Tickets() {
                                     time: selectedTicket.time,
                                     seats: selectedTicket.seats,
                                 })}
+                                title={`#${selectedTicket.ticketid} : ${selectedTicket.movie}`}
                                 size={200}
                                 level="H"
+                                imageSettings={{
+                                    src: "../../public/favicon.ico",
+                                    height: 32,
+                                    width: 32,
+                                    excavate: true,
+                                    opacity: 1,
+                                }}
                             />
                         </div>
                         <p className="qr-info">
