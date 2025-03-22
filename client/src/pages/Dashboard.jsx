@@ -1,23 +1,12 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import Navbar from "../components/Navbar";
 import "../styles/Dashboard.css";
 import MovieCard from "../components/MovieCard";
 
 export default function Dashboard() {
-    const navigate = useNavigate();
     const [movies, setMovies] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-
-    // useEffect(() => {
-    //     const userid = localStorage.getItem("userid");
-    //     if (userid) {
-    //         console.log("Logged in");
-    //     } else {
-    //         navigate("/login");
-    //     }
-    // }, []);
 
     useEffect(() => {
         const fetchMovies = async () => {
