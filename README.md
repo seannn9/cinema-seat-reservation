@@ -31,10 +31,10 @@ cd ../server
 pnpm install
 ```
 ### Set Up Database
-1. Get the sql files from the codebase ```cd ../client/src/sql```
+1. Get the [SQL files](./client/src/sql) from the codebase
 2. Open XAMPP and start `MySQL Database` and `Apache Web Server`
 3. Go to the url: http://localhost/phpmyadmin/ then click `Import`
-4. Click browse then import all the sql files in the database
+4. Click browse then import all the SQL files in the database
 
 ## Run the Website and Server
 Using pnpm
@@ -52,7 +52,8 @@ npm run dev
 cd ../server
 npm start
 ```
-## TODOS
+
+## Todos
 - [x] Welcome Page
 - [x] Login/Register using localstorage
 - [x] Dashboard containing dummy movies
