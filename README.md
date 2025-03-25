@@ -15,7 +15,7 @@ npm install -g pnpm@latest
 ```
 
 ## Setup the Development Environment
-Follow the installation process step-by-step:
+Follow the setup process step-by-step:
 
 ### Clone the repository
 ```sh
@@ -36,7 +36,7 @@ pnpm install
 3. Go to the url: http://localhost/phpmyadmin/ then click `Import`
 4. Click browse then import all the SQL files in the database
 
-## Run the Website and Server
+## Run the Development Server
 Using pnpm
 ```sh
 cd client
@@ -52,6 +52,8 @@ npm run dev
 cd ../server
 npm start
 ```
+
+Finally, go to http://localhost:5173/
 
 ## Todos
 - [x] Welcome Page
