@@ -39,7 +39,7 @@ pnpm install
 ## Run the Development Server
 Using pnpm
 ```sh
-cd client
+cd ../client
 pnpm run dev
 cd ../server
 pnpm start
@@ -47,7 +47,7 @@ pnpm start
 
 Using npm (slower)
 ```sh
-cd client
+cd ../client
 npm run dev
 cd ../server
 npm start
