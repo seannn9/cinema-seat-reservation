@@ -38,7 +38,7 @@ pnpm install
 5. Click browse then import all the SQL files in the database
 
 ## Run the Development Server
-### Using pnpm
+If you are using npm, just replace `pnpm` with `npm`
 ```sh
 cd client
 pnpm run dev
@@ -49,18 +49,7 @@ cd server
 pnpm start
 ```
 
-### Using npm (slower)
-```sh
-cd ../client
-npm run dev
-```
-On a separate terminal:
-```sh
-cd ../server
-npm start
-```
-
-> [!NOTE]
+> [!IMPORTANT]
 > Make sure to run the client and server in separate terminals.
 
 Finally, go to http://localhost:5173/
