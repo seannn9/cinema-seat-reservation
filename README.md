@@ -33,25 +33,35 @@ pnpm install
 ### Set Up Database
 1. Get the [SQL files](./client/src/sql) from the codebase
 2. Open XAMPP and start `MySQL Database` and `Apache Web Server`
-3. Go to the url: http://localhost/phpmyadmin/ then click `Import`
-4. Click browse then import all the SQL files in the database
+3. Go to the url: http://localhost/phpmyadmin/
+4. Create a new database and name it `filmreserve` then click `Import`
+5. Click browse then import all the SQL files in the database
 
 ## Run the Development Server
-Using pnpm
+### Using pnpm
 ```sh
 cd client
 pnpm run dev
-cd ../server
+```
+On a separate terminal:
+```sh
+cd server
 pnpm start
 ```
 
-Using npm (slower)
+### Using npm (slower)
 ```sh
-cd client
+cd ../client
 npm run dev
+```
+On a separate terminal:
+```sh
 cd ../server
 npm start
 ```
+
+> [!NOTE]
+> Make sure to run the client and server in separate terminals.
 
 Finally, go to http://localhost:5173/
 
