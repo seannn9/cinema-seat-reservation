@@ -35,6 +35,7 @@ CREATE TABLE `tickets` (
   `time` varchar(255) NOT NULL,
   `seats` varchar(255) NOT NULL,
   `price` int(11) NOT NULL,
+  `payment_method` varchar(255) NOT NULL,
   `userid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
