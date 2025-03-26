@@ -53,7 +53,7 @@ cd ../server
 npm start
 ```
 
-Finally, go to http://localhost:5173/
+Make sure that both client and server are running. Finally, go to http://localhost:5173/
 
 ## Todos
 - [x] Welcome Page
