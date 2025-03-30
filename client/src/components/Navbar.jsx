@@ -44,19 +44,16 @@ export default function Navbar() {
             </div>
             <div className="nav-links">
                 {localStorage.getItem("userid") &&
-                    pathname !== "/dashboard" &&
-                    pathname !== "/" && (
+                    pathname !== "/dashboard" && (
                         <Link to="/dashboard" className="dashboard-link">
                             Dashboard
                         </Link>
                     )}
-                {localStorage.getItem("userid") &&
-                    pathname !== "/tickets" &&
-                    pathname !== "/" && (
-                        <Link to="/tickets" className="dashboard-link">
-                            Tickets
-                        </Link>
-                    )}
+                {localStorage.getItem("userid") && pathname !== "/tickets" && (
+                    <Link to="/tickets" className="dashboard-link">
+                        Tickets
+                    </Link>
+                )}
                 {isLoggedIn ? (
                     <ProfileDropdown username={username} />
                 ) : (
