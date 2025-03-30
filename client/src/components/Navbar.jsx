@@ -50,6 +50,13 @@ export default function Navbar() {
                             Dashboard
                         </Link>
                     )}
+                {localStorage.getItem("userid") &&
+                    pathname !== "/tickets" &&
+                    pathname !== "/" && (
+                        <Link to="/tickets" className="dashboard-link">
+                            Tickets
+                        </Link>
+                    )}
                 {isLoggedIn ? (
                     <ProfileDropdown username={username} />
                 ) : (
