@@ -10,9 +10,9 @@ Make sure you have these installed:
 
 > [!NOTE]
 > pnpm is optional but recommended
-```sh
-npm install -g pnpm@latest
-```
+> ```
+> npm install -g pnpm@latest
+> ```
 
 ## Setup the Development Environment
 Follow the setup process step-by-step:
