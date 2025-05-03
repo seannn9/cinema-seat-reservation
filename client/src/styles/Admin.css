@@ -1,10 +1,10 @@
-.admin-container {
+/* .admin-container {
     min-height: 100vh;
     background-image: url("../assets/hero-full.webp");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-}
+} */
 
 .admin-content {
     padding: 2rem 5rem;
