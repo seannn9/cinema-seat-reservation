@@ -41,15 +41,17 @@ export default function Tickets() {
                 <h1>
                     <span style={{ color: "white" }}>{username}'s</span> Tickets
                 </h1>
-                <h3
-                    style={{
-                        marginTop: "0",
-                        color: "#979494",
-                        fontStyle: "italic",
-                    }}
-                >
-                    Click on a ticket to access QR Code
-                </h3>
+                {tickets.length !== 0 && (
+                    <h3
+                        style={{
+                            marginTop: "0",
+                            color: "#979494",
+                            fontStyle: "italic",
+                        }}
+                    >
+                        Click on a ticket to access QR Code
+                    </h3>
+                )}
                 {tickets.length === 0 && (
                     <h2 style={{ fontStyle: "italic", color: "#979494" }}>
                         No Tickets Found
