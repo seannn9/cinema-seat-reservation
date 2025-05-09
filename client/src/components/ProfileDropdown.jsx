@@ -72,6 +72,16 @@ export default function ProfileDropdown({ username }) {
                             Manage
                         </button>
                     )}
+                    {isAdmin && (
+                        <button
+                            className={
+                                pathname === "/admin/reports" ? "active" : ""
+                            }
+                            onClick={() => navigate("/admin/reports")}
+                        >
+                            Reports
+                        </button>
+                    )}
                     <button
                         className={pathname === "/dashboard" ? "active" : ""}
                         onClick={() => navigate("/dashboard")}
