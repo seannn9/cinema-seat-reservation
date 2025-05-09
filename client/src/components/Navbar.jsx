@@ -54,6 +54,22 @@ export default function Navbar() {
                         Tickets
                     </Link>
                 )}
+                {/* Admin Links */}
+                {username === "Admin" && pathname !== "/dashboard" && (
+                    <Link to="/dashboard" className="dashboard-link">
+                        Dashboard
+                    </Link>
+                )}
+                {username === "Admin" && pathname !== "/admin" && (
+                    <Link to="/admin" className="dashboard-link">
+                        Manage
+                    </Link>
+                )}
+                {username === "Admin" && pathname !== "/admin/reports" && (
+                    <Link to="/admin/reports" className="dashboard-link">
+                        Reports
+                    </Link>
+                )}
                 {isLoggedIn ? (
                     <ProfileDropdown username={username} />
                 ) : (
