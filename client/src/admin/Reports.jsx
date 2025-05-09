@@ -1,15 +1,24 @@
 import Navbar from "../components/Navbar";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import "../styles/Reports.css";
 
 export default function Reports() {
+    const navigate = useNavigate();
     const [transactions, setTransactions] = useState([]);
     const [usernames, setUsernames] = useState({});
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(10);
     const [searchTerm, setSearchTerm] = useState("");
     const [filteredTransactions, setFilteredTransactions] = useState([]);
+
+    useEffect(() => {
+        const adminid = localStorage.getItem("adminid");
+        if (!adminid) {
+            navigate("/login");
+        }
+    }, []);
 
     useEffect(() => {
         Axios.post("http://localhost:5001/getalltickets")
