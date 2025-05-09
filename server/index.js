@@ -2,6 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql");
 const bcrypt = require("bcrypt");
+const nodemailer = require("nodemailer");
+const QRCode = require("qrcode");
+require("dotenv").config();
 
 const app = express();
 const PORT = 5001;
@@ -9,12 +12,73 @@ const PORT = 5001;
 app.use(cors());
 app.use(express.json());
 
+const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+    },
+});
+
 const db = mysql.createConnection({
     user: "root",
     host: "localhost",
     password: "",
     database: "filmreserve",
 });
+
+const sendConfirmationEmail = async (details) => {
+    const qrCodeData = JSON.stringify({
+        ticketid: details.ticketid,
+        movie: details.movie,
+        location: details.location,
+        date: details.date,
+        time: details.time,
+        seats: details.seats,
+    });
+
+    const qrCodeImage = await QRCode.toDataURL(qrCodeData, {
+        errorCorrectionLevel: "H",
+        margin: 1,
+        width: 200,
+    });
+    const emailTemplate = `
+        <h1>Payment Confirmation</h1>
+        <h2>Thank you for your purchase!</h2>
+        <div style="margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
+            <h3>Booking Details:</h3>
+            <p><strong>Movie:</strong> ${details.movie}</p>
+            <p><strong>Location:</strong> ${details.location}</p>
+            <p><strong>Date:</strong> ${details.date}</p>
+            <p><strong>Time:</strong> ${details.time}</p>
+            <p><strong>Seats:</strong> ${details.seats}</p>
+            <p><strong>Total Amount:</strong> ₱${details.price}</p>
+            <p><strong>Payment Method:</strong> ${details.payment_method}</p>
+        </div>
+        <div style="text-align: center; margin: 20px 0;">
+            <h3>Your Ticket QR Code</h3>
+            <img src="${qrCodeImage}" alt="Ticket QR Code" style="max-width: 200px;"/>
+            <p style="color: #666; font-style: italic;">Show this QR code when entering the cinema</p>
+        </div>
+        <p>Please keep this email as your receipt. Show this email when entering the cinema.</p>
+        <p>Enjoy your movie!</p>
+    `;
+
+    const mailOptions = {
+        from: '"ReelTime" <seanulric9@gmail.com>',
+        to: details.email,
+        subject: "Movie Ticket Confirmation - ReelTime",
+        html: emailTemplate,
+    };
+
+    try {
+        await transporter.sendMail(mailOptions);
+        return true;
+    } catch (error) {
+        console.error("Error sending email:", error);
+        return false;
+    }
+};
 
 app.post("/getshowingmovies", (req, res) => {
     db.query("SELECT * FROM movies", (err, result) => {
@@ -46,7 +110,7 @@ app.post("/getmovie/:movieid", (req, res) => {
     );
 });
 
-app.post("/processpayment", (req, res) => {
+app.post("/processpayment", async (req, res) => {
     const {
         movie,
         location,
@@ -58,18 +122,73 @@ app.post("/processpayment", (req, res) => {
         userid,
     } = req.body;
 
-    db.query(
-        "INSERT INTO tickets (movie, location, date, time, seats, price, payment_method, userid) VALUES (?,?,?,?,?,?,?,?)",
-        [movie, location, date, time, seats, price, payment_method, userid],
-        (err, result) => {
-            if (err) {
-                console.log(err);
-                return res.status(500).send("Server error.");
-            } else {
-                res.send("Payment successful!");
-            }
+    try {
+        // Get user's email
+        const userEmail = await new Promise((resolve, reject) => {
+            db.query(
+                "SELECT email FROM users WHERE userid = ?",
+                [userid],
+                (err, result) => {
+                    if (err) reject(err);
+                    else resolve(result[0]?.email);
+                }
+            );
+        });
+
+        if (!userEmail) {
+            return res.status(400).json({
+                message: "User email not found",
+                success: false,
+            });
         }
-    );
+
+        // Insert ticket into database and get the ticket ID
+        const ticketResult = await new Promise((resolve, reject) => {
+            db.query(
+                "INSERT INTO tickets (movie, location, date, time, seats, price, payment_method, userid) VALUES (?,?,?,?,?,?,?,?)",
+                [
+                    movie,
+                    location,
+                    date,
+                    time,
+                    seats,
+                    price,
+                    payment_method,
+                    userid,
+                ],
+                (err, result) => {
+                    if (err) reject(err);
+                    else resolve(result);
+                }
+            );
+        });
+
+        // Send confirmation email with QR code
+        const emailSent = await sendConfirmationEmail({
+            ticketId: ticketResult.insertId,
+            movie,
+            location,
+            date,
+            time,
+            seats,
+            price,
+            payment_method,
+            email: userEmail,
+        });
+
+        res.json({
+            message: "Payment successful!",
+            success: true,
+            emailSent: emailSent,
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            message: "Server error",
+            success: false,
+            error: error.message,
+        });
+    }
 });
 
 app.post("/getusertickets", (req, res) => {
@@ -262,6 +381,17 @@ app.post("/getreservedseats", (req, res) => {
             res.send(reservedSeats);
         }
     );
+});
+
+app.post("/getalltickets", (req, res) => {
+    db.query("SELECT * FROM tickets", (err, result) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).send("Server error.");
+        } else {
+            res.send(result);
+        }
+    });
 });
 
 app.listen(PORT, () => {
