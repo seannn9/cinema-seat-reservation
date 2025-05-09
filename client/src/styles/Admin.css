@@ -25,7 +25,8 @@
     background-color: var(--hover-color);
 }
 
-.movies-table {
+.movies-table,
+.reports-table {
     background-color: rgba(36, 36, 36, 0.9);
     border-radius: var(--border-radius);
     padding: 1rem;
