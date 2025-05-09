@@ -113,17 +113,23 @@ export default function Payment() {
                 userid: localStorage.getItem("userid"),
             })
                 .then((response) => {
-                    if (response.data === "Payment successful!") {
+                    if (response.data.success) {
                         setPaymentStatus("Payment successful!");
-                        console.log(paymentStatus);
+                        if (response.data.emailSent) {
+                            toast.success(
+                                "Booking confirmation sent to your email!"
+                            );
+                        }
                         navigate("/tickets");
                     } else {
                         setPaymentStatus("Payment failed!");
-                        console.log(paymentStatus);
+                        toast.error(response.data.message);
                     }
                 })
                 .catch((err) => {
-                    console.log(err);
+                    console.error(err);
+                    toast.error("An error occurred during payment");
+                    setPaymentStatus("Payment failed!");
                 })
                 .finally(() => {
                     setIsProcessing(false);
