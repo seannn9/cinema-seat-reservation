@@ -12,6 +12,7 @@ import Payment from "./pages/Payment";
 import Tickets from "./pages/Tickets";
 import Admin from "./admin/Admin";
 import About from "./pages/About";
+import Reports from "./admin/Reports";
 library.add(fas);
 
 function App() {
@@ -32,8 +33,9 @@ function App() {
                 />
                 <Route path="/payment" element={<Payment />} />
                 <Route path="tickets" element={<Tickets />} />
-                <Route path="/admin" element={<Admin />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/admin" element={<Admin />} />
+                <Route path="/admin/reports" element={<Reports />} />
             </Routes>
             <ToastContainer
                 autoClose={1500}
